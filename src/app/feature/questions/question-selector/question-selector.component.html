@@ -1,0 +1,9 @@
+<ng-container [ngSwitch]="question.type">
+  <app-multiple-choice-question *ngSwitchCase="'multipleChoice'" [control]="control" [question]="question">
+
+  </app-multiple-choice-question>
+  <app-text-question *ngSwitchCase="'text'" [control]="control" [question]="question"></app-text-question>
+  <div *ngSwitchDefault>
+    The question type "{{question.type}}" is unknown.
+  </div>
+</ng-container>

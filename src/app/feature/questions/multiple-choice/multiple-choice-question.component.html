@@ -1,0 +1,7 @@
+<h3>{{question.text}}</h3>
+<form>
+  <div *ngFor="let choice of question.choices">
+    <label [for]="'__option_' + choice.value">{{choice.text}}</label>
+    <input [formControl]="control" [id]="'__option_' + choice.value" [value]="choice.value" type="radio">
+  </div>
+</form>
