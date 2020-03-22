@@ -1,13 +1,19 @@
 import {Question} from './question';
 
+export interface Questionary {
+  title: string;
+  questionContainers: QuestionContainer[];
+}
+
 export interface QuestionContainer {
   title: string;
   description: string;
   questionEntries: QuestionContainerEntry[];
+  namespace: string;
 }
 
-export interface QuestionContainerEntry {
-  question: Question;
+export interface QuestionContainerEntry<T extends Question = Question> {
+  question: T;
 
   /**
    * expression, that fills in a default value, if the field is untouched

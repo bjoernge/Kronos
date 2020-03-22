@@ -1,1 +1,4 @@
-<input [formControl]="control" [placeholder]="question.text" type="text">
+<mat-form-field>
+  <input [formControl]="control" [placeholder]="question.text | translate" matInput type="text">
+</mat-form-field>
+

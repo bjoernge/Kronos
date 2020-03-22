@@ -1,8 +1,8 @@
-<h1>{{questionContainer.title}}</h1>
-<p>{{questionContainer.description}}</p>
-
-<div class="questions">
-  <ng-container *ngFor="let question of questions$ | async; trackBy: trackByQuestionId">
-    <app-question-selector [control]="formGroup.controls[question.id]" [question]="question"></app-question-selector>
-  </ng-container>
+<h1>{{questionary.title | translate}}</h1>
+<div class="card-container">
+  <div *ngFor="let container of questionary.questionContainers" class="card">
+    <app-question-container [context]="context" [group]="formGroup.controls[container.namespace]"
+                            [questionContainer]="container">
+    </app-question-container>
+  </div>
 </div>

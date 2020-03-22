@@ -1,16 +1,16 @@
 import {sandboxOf} from 'angular-playground';
-import {QuestionaryComponent} from './questionary.component';
+import {QuestionContainerComponent} from './question-container.component';
 import {QuestionsModule} from '../questions.module';
 import {QuestionContainer} from '../../../models/questions/questionContainer';
 import {TextQuestion} from '../../../models/questions/textQuestion';
 import {MultipleChoiceQuestion} from '../../../models/questions/multipleChoiceQuestion';
 
-export default sandboxOf(QuestionaryComponent, {
+export default sandboxOf(QuestionContainerComponent, {
   declareComponent: false,
   imports: [QuestionsModule]
 })
   .add('default', {
-    template: `<app-questionary [questionContainer]="questionContainer"></app-questionary>`,
+    template: `<app-question-container [questionContainer]="questionContainer"></app-question-container>`,
     context: {
       questionContainer: {
         title: 'testQuestionTitle',
@@ -35,7 +35,7 @@ export default sandboxOf(QuestionaryComponent, {
     }
   })
   .add('conditional questions', {
-    template: `<app-questionary [questionContainer]="questionContainer"></app-questionary>`,
+    template: `<app-question-container [questionContainer]="questionContainer"></app-question-container>`,
     context: {
       questionContainer: {
         title: 'testQuestionTitle',
@@ -61,7 +61,7 @@ export default sandboxOf(QuestionaryComponent, {
     }
   })
   .add('conditional default', {
-    template: `<app-questionary [questionContainer]="questionContainer"></app-questionary>`,
+    template: `<app-question-container [questionContainer]="questionContainer"></app-question-container>`,
     context: {
       questionContainer: {
         title: 'testQuestionTitle',

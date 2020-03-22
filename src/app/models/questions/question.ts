@@ -5,3 +5,6 @@ export interface Question {
   hint?: string;
 }
 
+// Belege
+// Backwards compatibility
+// Cards

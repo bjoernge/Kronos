@@ -1,55 +1,53 @@
-import {Component, Input, OnInit, TrackByFunction} from '@angular/core';
-import {QuestionContainer} from '../../../models/questions/questionContainer';
+import {Component, Input, OnInit} from '@angular/core';
+import {Questionary} from '../../../models/questions/questionContainer';
 import {FormControl, FormGroup} from '@angular/forms';
-import {QuestionService} from '../question.service';
-import {Question} from '../../../models/questions/question';
-import {Observable} from 'rxjs';
-import {map, startWith} from 'rxjs/operators';
+import {SafeSubscriptionComponent} from '../../../shared/safe-subscription-component';
 
 @Component({
   selector: 'app-questionary',
   templateUrl: './questionary.component.html',
   styleUrls: ['./questionary.component.scss']
 })
-export class QuestionaryComponent implements OnInit {
+export class QuestionaryComponent extends SafeSubscriptionComponent implements OnInit {
 
   @Input()
-  public questionContainer: QuestionContainer;
-
-  public questions$: Observable<Question[]>;
+  public questionary: Questionary;
 
   public formGroup: FormGroup;
 
-  constructor(private questionService: QuestionService) {
+  constructor() {
+    super();
   }
 
-  public trackByQuestionId: TrackByFunction<Question> = (index, entry) => entry && entry.id;
+  public get context(): { [key: string]: any } {
+    return this.formGroup && Object.values(this.formGroup.controls)
+      .reduce((prev, cur: FormGroup) => ({...prev, ...cur.value}), {});
+  }
 
   ngOnInit() {
     this.formGroup =
-      new FormGroup(this.questionContainer.questionEntries.reduce((prev, cur) =>
-        ({...prev, [cur.question.id]: new FormControl()}), {}));
+      new FormGroup(this.questionary.questionContainers.reduce((prev, cur) =>
+        ({
+          ...prev,
+          [cur.namespace]: new FormGroup(cur.questionEntries.reduce((p, c) => ({...p, [c.question.id]: new FormControl()}), {}))
+        }), {}));
 
-    this.formGroup.valueChanges.subscribe(context => {
-      for (const question of this.questionContainer.questionEntries) {
-        const control = this.formGroup.controls[question.question.id];
+    this.subscribe(this.formGroup.valueChanges, context => {
+      for (const container of this.questionary.questionContainers) {
+        const group = this.formGroup.controls[container.namespace] as FormGroup;
+        for (const question of container.questionEntries) {
+          const control = group.controls[question.question.id];
 
-        // reevaluate the default value
-        if (question.defaultValue && control.pristine) {
-          const defaultValue = question.defaultValue(context);
-          if (defaultValue !== control.value) {
-            control.setValue(defaultValue);
+          // reevaluate the default value
+          if (question.defaultValue && control.pristine) {
+            const defaultValue = question.defaultValue(context);
+            if (defaultValue !== control.value) {
+              control.setValue(defaultValue);
+            }
           }
         }
       }
     });
-
-    this.questions$ = this.formGroup.valueChanges.pipe(
-      startWith({}),
-      map(context => this.questionContainer.questionEntries
-        .filter(q => !q.isHidden || !q.isHidden(context))
-        .map(q => q.question))
-    );
   }
 
 }

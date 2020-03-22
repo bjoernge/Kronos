@@ -1,0 +1,14 @@
+<mat-card>
+  <mat-card-title>{{questionContainer.title | translate}}</mat-card-title>
+  <mat-card-subtitle>{{questionContainer.description | translate}}</mat-card-subtitle>
+  <mat-card-content>
+    <ng-container *ngFor="let entry of questionContainer.questionEntries; trackBy: trackByQuestionEntryId">
+      <h3>{{entry.question.text | translate}}</h3>
+
+      <app-question-selector *ngIf="!(entry.isHidden && entry.isHidden(context))"
+                             [control]="group.controls[entry.question.id]"
+                             [question]="entry.question"></app-question-selector>
+    </ng-container>
+
+  </mat-card-content>
+</mat-card>
