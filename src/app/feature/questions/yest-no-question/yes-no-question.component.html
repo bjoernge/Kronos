@@ -1,5 +1,9 @@
 <ng-container *ngIf="question.hint">
   <p>{{question.hint | translate}}</p>
 </ng-container>
-<button mat-raised-button>{{question.yesText | translate}}</button>
-<button mat-raised-button>{{question.noText | translate}}</button>
+
+<mat-button-toggle-group [formControl]="control">
+  <mat-button-toggle [value]="true">{{question.yesText | translate}}</mat-button-toggle>
+  <mat-button-toggle [value]="false">{{question.noText | translate}}</mat-button-toggle>
+</mat-button-toggle-group>
+

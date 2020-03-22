@@ -6,9 +6,10 @@ import {QuestionContainerComponent} from "./question-container/question-containe
 import {TextQuestionComponent} from "./text-question/text-question.component";
 import {QuestionaryComponent} from "./questionary/questionary.component";
 import {SharedModule} from "../../shared/shared.module";
-import {MatButtonModule, MatCardModule, MatInputModule} from "@angular/material";
+import {MatButtonModule, MatButtonToggleModule, MatCardModule, MatDatepickerModule, MatIconModule, MatInputModule} from "@angular/material";
 import {YesNoQuestionComponent} from "./yest-no-question/yes-no-question.component";
-import { TextBlockQuestionComponent } from './text-block-question/text-block-question.component';
+import {TextBlockQuestionComponent} from "./text-block-question/text-block-question.component";
+import {CalendarQuestionComponent} from "./calendar-question/calendar-question.component";
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { TextBlockQuestionComponent } from './text-block-question/text-block-que
     QuestionaryComponent,
     YesNoQuestionComponent,
     TextBlockQuestionComponent,
+    CalendarQuestionComponent,
   ],
   exports: [
     MultipleChoiceQuestionComponent,
@@ -28,6 +30,7 @@ import { TextBlockQuestionComponent } from './text-block-question/text-block-que
     YesNoQuestionComponent,
     QuestionaryComponent,
     TextBlockQuestionComponent,
+    CalendarQuestionComponent,
   ],
   imports: [
     SharedModule,
@@ -35,7 +38,10 @@ import { TextBlockQuestionComponent } from './text-block-question/text-block-que
     ReactiveFormsModule,
     MatCardModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    MatDatepickerModule,
+    MatIconModule,
+    MatButtonToggleModule
   ]
 })
 export class QuestionsModule {

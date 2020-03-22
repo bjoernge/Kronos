@@ -9,6 +9,7 @@ export const part1 = buildQuestionary("part1")
     .askYesNoQuestion("q3", f => f
       .insteadOfYesSay("hello World!"))
     .printInfo("q4", f => f.showHint())
+    .askForDate("q5", f => f.showAsPopup())
   )
   .addQuestionContainer("card2", c => c
     .askText("q3", f => f
