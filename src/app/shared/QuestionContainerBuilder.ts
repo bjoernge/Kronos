@@ -12,7 +12,7 @@ import {CalendarQuestionBuilder} from "./CalendarQuestionBuilder";
 import {CalendarQuestion} from "../models/questions/calendarQuestion";
 import {MultipleChoiceQuestion} from "../models/questions/multipleChoiceQuestion";
 
-type BuilderCallBack<T extends Question> = (builder: QuestionBuilder<T>) => QuestionBuilder<T>;
+type BuilderCallBack<T extends Question, B extends QuestionBuilder<T>> = (builder: B) => B;
 
 export class QuestionContainerBuilder {
   private description: string;
@@ -30,23 +30,23 @@ export class QuestionContainerBuilder {
     this.description = description;
   }
 
-  public askText(id: string, callback?: BuilderCallBack<TextQuestion>): this {
+  public askText(id: string, callback?: BuilderCallBack<TextQuestion, TextQuestionBuilder>): this {
     return this.ask(new TextQuestionBuilder(id, this.namespace), callback);
   }
 
-  public printInfo(id: string, callback?: BuilderCallBack<TextBlockQuestion>): this {
+  public printInfo(id: string, callback?: BuilderCallBack<TextBlockQuestion, TextBlockQuestionBuilder>): this {
     return this.ask(new TextBlockQuestionBuilder(id, this.namespace), callback);
   }
 
-  public askYesNoQuestion(id: string, callback?: BuilderCallBack<YesNoQuestion>): this {
+  public askYesNoQuestion(id: string, callback?: BuilderCallBack<YesNoQuestion, YesNoQuestionBuilder>): this {
     return this.ask(new YesNoQuestionBuilder(id, this.namespace), callback);
   }
 
-  public askMultipleChoiceQuestion(id: string, callback?: BuilderCallBack<MultipleChoiceQuestion>): this {
+  public askMultipleChoiceQuestion(id: string, callback?: BuilderCallBack<MultipleChoiceQuestion, MultipleChoiceQuestionBuilder>): this {
     return this.ask(new MultipleChoiceQuestionBuilder(id, this.namespace), callback);
   }
 
-  public askForDate(id: string, callback?: BuilderCallBack<CalendarQuestion>): this {
+  public askForDate(id: string, callback?: BuilderCallBack<CalendarQuestion, CalendarQuestionBuilder>): this {
     return this.ask(new CalendarQuestionBuilder(id, this.namespace), callback);
   }
 
@@ -59,7 +59,7 @@ export class QuestionContainerBuilder {
     };
   }
 
-  private ask<Q extends Question>(builder: QuestionBuilder<Q>, callback?: BuilderCallBack<Q>): this {
+  private ask<Q extends Question, B extends QuestionBuilder<Q>>(builder: B, callback?: BuilderCallBack<Q, B>): this {
     const entry = (callback ? callback(builder) : builder).buildEntry();
     this.questionEntries.push(entry);
     return this;

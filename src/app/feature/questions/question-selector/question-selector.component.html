@@ -3,6 +3,9 @@
 
   </app-multiple-choice-question>
   <app-text-question *ngSwitchCase="'text'" [control]="control" [question]="question"></app-text-question>
+  <app-yes-no-question *ngSwitchCase="'yesno'" [control]="control" [question]="question"></app-yes-no-question>
+  <app-text-block-question *ngSwitchCase="'textBlock'" [control]="control"
+                           [question]="question"></app-text-block-question>
   <div *ngSwitchDefault>
     The question type "{{question.type}}" is unknown.
   </div>

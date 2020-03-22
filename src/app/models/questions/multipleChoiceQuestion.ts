@@ -20,8 +20,8 @@ export class MultipleChoiceQuestion implements Question {
     };
 
     this.hint = config.hint;
-    this.id = config.hint;
-    this.text = config.hint;
+    this.id = config.id;
+    this.text = config.text;
     this.choices = config.choices;
     this.documentRequests = config.documents;
   }

@@ -18,8 +18,8 @@ export class YesNoQuestion implements Question {
     };
 
     this.hint = config.hint;
-    this.id = config.hint;
-    this.text = config.hint;
+    this.id = config.id;
+    this.text = config.text;
     this.yesText = config.yesText;
     this.noText = config.noText;
 

@@ -21,7 +21,7 @@ export abstract class QuestionBuilder<T extends Question> {
 
   public constructor(protected readonly id: string, protected namespace: string) {
     this.text = `${namespace}.${id}.text`;
-    this.hintText = `${namespace}.${id}.hint`;
+    this.hintText = null;
     this.id = namespace ? `${namespace}.${id}` : id;
     this.questionContextCallback = ctx => ({
       raw: ctx,
@@ -29,8 +29,8 @@ export abstract class QuestionBuilder<T extends Question> {
     });
   }
 
-  public hideHint(): QuestionBuilder<T> {
-    this.hintText = null;
+  public showHint(): QuestionBuilder<T> {
+    this.hintText = `${this.namespace}.${this.id}.hint`;
     return this;
   }
 

@@ -18,8 +18,8 @@ export class TextBlockQuestion implements Question {
     };
 
     this.hint = config.hint;
-    this.id = config.hint;
-    this.text = config.hint;
+    this.id = config.id;
+    this.text = config.text;
     this.documentRequests = config.documents;
   }
 }

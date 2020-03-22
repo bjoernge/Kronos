@@ -11,8 +11,8 @@ export class TextQuestion implements Question {
 
   public constructor(config: QuestionOptions) {
     this.hint = config.hint;
-    this.id = config.hint;
-    this.text = config.hint;
+    this.id = config.id;
+    this.text = config.text;
 
   }
 }

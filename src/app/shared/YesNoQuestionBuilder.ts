@@ -2,8 +2,8 @@ import {QuestionBuilder} from "./QuestionBuilder";
 import {YesNoQuestion} from "../models/questions/yesNoQuestion";
 
 export class YesNoQuestionBuilder extends QuestionBuilder<YesNoQuestion> {
-  private yesText: string;
-  private noText: string;
+  private yesText: string = "answers.yes";
+  private noText: string = "answers.no";
 
   public insteadOfYesSay(yesText: string): this {
     this.yesText = yesText;
