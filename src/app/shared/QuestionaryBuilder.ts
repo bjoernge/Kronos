@@ -1,5 +1,5 @@
-import {Questionary, QuestionContainer} from '../models/questions/questionContainer';
-import {QuestionContainerBuilder} from './QuestionContainerBuilder';
+import {Questionary, QuestionContainer} from "../models/questions/questionContainer";
+import {QuestionContainerBuilder} from "./QuestionContainerBuilder";
 
 export function buildQuestionary(title: string): QuestionaryBuilder {
   return new QuestionaryBuilder(title);
@@ -11,15 +11,12 @@ export class QuestionaryBuilder {
   public constructor(private title: string) {
   }
 
-  public addQuestionContainer(container: QuestionContainer): QuestionaryBuilder;
-  public addQuestionContainer(namespace: string): QuestionContainerBuilder;
-  public addQuestionContainer(namespaceOrContainer: string | QuestionContainer): QuestionaryBuilder | QuestionContainerBuilder {
-    if (typeof namespaceOrContainer === 'string') {
-      return new QuestionContainerBuilder('questions.' + this.title + '.' + namespaceOrContainer, this);
-    } else {
-      this.containers.push(namespaceOrContainer);
-      return this;
-    }
+  public addQuestionContainer(namespace: string,
+                              callback: (builder: QuestionContainerBuilder) => QuestionContainerBuilder): QuestionaryBuilder {
+    const builder = new QuestionContainerBuilder("questions." + this.title + "." + namespace);
+    const container = callback(builder).build();
+    this.containers.push(container);
+    return this;
   }
 
   public build(): Questionary {

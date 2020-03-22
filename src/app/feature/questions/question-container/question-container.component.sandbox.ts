@@ -1,86 +1,92 @@
-import {sandboxOf} from 'angular-playground';
-import {QuestionContainerComponent} from './question-container.component';
-import {QuestionsModule} from '../questions.module';
-import {QuestionContainer} from '../../../models/questions/questionContainer';
-import {TextQuestion} from '../../../models/questions/textQuestion';
-import {MultipleChoiceQuestion} from '../../../models/questions/multipleChoiceQuestion';
+import {sandboxOf} from "angular-playground";
+import {QuestionContainerComponent} from "./question-container.component";
+import {QuestionsModule} from "../questions.module";
+import {QuestionContainer} from "../../../models/questions/questionContainer";
+import {TextQuestion} from "../../../models/questions/textQuestion";
+import {MultipleChoiceQuestion} from "../../../models/questions/multipleChoiceQuestion";
 
 export default sandboxOf(QuestionContainerComponent, {
   declareComponent: false,
   imports: [QuestionsModule]
 })
-  .add('default', {
+  .add("default", {
     template: `<app-question-container [questionContainer]="questionContainer"></app-question-container>`,
     context: {
       questionContainer: {
-        title: 'testQuestionTitle',
-        description: 'testQuestionDescription',
+        title: "testQuestionTitle",
+        description: "testQuestionDescription",
         questionEntries: [
           {
-            question: new TextQuestion('textQuestion1', 'enterSomeText'),
+            question: new TextQuestion({id: "textQuestion1", text: "enterSomeText"}),
           },
           {
-            question: new MultipleChoiceQuestion('multipleChoiceQuestion1', 'whatDoYouChoose', [
-              {
-                value: 'option1',
-                text: 'Option1'
-              }, {
-                value: 'option2',
-                text: 'Option2'
-              },
-            ])
+            question: new MultipleChoiceQuestion({
+              id: "multipleChoiceQuestion1", text: "whatDoYouChoose", choices: [
+                {
+                  value: "option1",
+                  text: "Option1"
+                }, {
+                  value: "option2",
+                  text: "Option2"
+                },
+              ]
+            })
           }
         ]
       } as QuestionContainer
     }
   })
-  .add('conditional questions', {
+  .add("conditional questions", {
     template: `<app-question-container [questionContainer]="questionContainer"></app-question-container>`,
     context: {
       questionContainer: {
-        title: 'testQuestionTitle',
-        description: 'testQuestionDescription',
+        title: "testQuestionTitle",
+        description: "testQuestionDescription",
         questionEntries: [
           {
-            question: new MultipleChoiceQuestion('multipleChoiceQuestion1', 'whatDoYouChoose', [
-              {
-                value: 'option1',
-                text: 'Option1'
-              }, {
-                value: 'option2',
-                text: 'Option2'
-              },
-            ])
+            question: new MultipleChoiceQuestion({
+              id: "multipleChoiceQuestion1", text: "whatDoYouChoose", choices: [
+                {
+                  value: "option1",
+                  text: "Option1"
+                }, {
+                  value: "option2",
+                  text: "Option2"
+                },
+              ]
+            })
           },
           {
-            question: new TextQuestion('textQuestion1', 'enterSomeText'),
-            isHidden: context => context.multipleChoiceQuestion1 !== 'option1'
+            question: new TextQuestion({id: "textQuestion1", text: "enterSomeText"}),
+            isHidden: context => context.multipleChoiceQuestion1 !== "option1"
           },
         ]
       } as QuestionContainer
     }
   })
-  .add('conditional default', {
+  .add("conditional default", {
     template: `<app-question-container [questionContainer]="questionContainer"></app-question-container>`,
     context: {
       questionContainer: {
-        title: 'testQuestionTitle',
-        description: 'testQuestionDescription',
+        title: "testQuestionTitle",
+        description: "testQuestionDescription",
         questionEntries: [
           {
-            question: new MultipleChoiceQuestion('multipleChoiceQuestion1', 'whatDoYouChoose', [
-              {
-                value: 'option1',
-                text: 'Option1'
-              }, {
-                value: 'option2',
-                text: 'Option2'
-              },
-            ])
+            question: new MultipleChoiceQuestion({
+              id: "multipleChoiceQuestion1", text: "whatDoYouChoose", choices: [
+                {
+                  value: "option1",
+                  text: "Option1"
+                }, {
+                  value: "option2",
+                  text: "Option2"
+                },
+              ]
+            })
           },
           {
-            question: new TextQuestion('textQuestion1', 'enterSomeText'),
-            defaultValue: context => context.multipleChoiceQuestion1 === 'option1' ? 'You chose option1' : 'You chose option2'
+            question: new TextQuestion({id: "textQuestion1", text: "enterSomeText"}),
+            defaultValue: context => context.multipleChoiceQuestion1 === "option1" ? "You chose option1" : "You chose option2"
           },
         ]
       } as QuestionContainer

@@ -2,17 +2,24 @@ import {Question} from "./question";
 import {QuestionOptions} from "./questionOptions";
 import {DocumentRequest} from "./documentRequest";
 
-export class TextQuestion implements Question {
-  public readonly type = "text";
+export class TextBlockQuestion implements Question {
+
+  public readonly type: string = "textBlock";
   public hint: string;
   public id: string;
   public text: string;
   public documentRequests: DocumentRequest[] = [];
 
-  public constructor(config: QuestionOptions) {
+  constructor(config: QuestionOptions) {
+
+    config = {
+      documents: [],
+      ...config
+    };
+
     this.hint = config.hint;
     this.id = config.hint;
     this.text = config.hint;
-
+    this.documentRequests = config.documents;
   }
 }

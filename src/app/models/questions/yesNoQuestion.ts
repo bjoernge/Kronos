@@ -1,19 +1,17 @@
 import {Question} from "./question";
-import {Choice} from "./choice";
 import {QuestionOptions} from "./questionOptions";
 import {DocumentRequest} from "./documentRequest";
 
-export class MultipleChoiceQuestion implements Question {
-  public type = "multipleChoice";
+export class YesNoQuestion implements Question {
+  public readonly type: string = "yesno";
   public hint: string;
   public id: string;
   public text: string;
-  public choices: Choice[];
-  public documentRequests: DocumentRequest[];
+  public yesText: string;
+  public noText: string;
+  public documentRequests: DocumentRequest[] = [];
 
-  public constructor(config: QuestionOptions & {
-    choices: Choice[]
-  }) {
+  constructor(config: QuestionOptions & { yesText?: string, noText?: string }) {
     config = {
       documents: [],
       ...config
@@ -22,7 +20,9 @@ export class MultipleChoiceQuestion implements Question {
     this.hint = config.hint;
     this.id = config.hint;
     this.text = config.hint;
-    this.choices = config.choices;
+    this.yesText = config.yesText;
+    this.noText = config.noText;
+
     this.documentRequests = config.documents;
   }
 }

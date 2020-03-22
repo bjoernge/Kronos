@@ -1,14 +1,25 @@
-import {QuestionContainer, QuestionContainerEntry} from '../models/questions/questionContainer';
-import {MultipleChoiceQuestionBuilder} from './MultipleChoiceQuestionBuilder';
-import {QuestionaryBuilder} from './QuestionaryBuilder';
-import {TextQuestionBuilder} from './TextQuestionBuilder';
+import {QuestionContainer, QuestionContainerEntry} from "../models/questions/questionContainer";
+import {MultipleChoiceQuestionBuilder} from "./MultipleChoiceQuestionBuilder";
+import {TextQuestionBuilder} from "./TextQuestionBuilder";
+import {TextQuestion} from "../models/questions/textQuestion";
+import {TextBlockQuestion} from "../models/questions/textBlockQuestion";
+import {TextBlockQuestionBuilder} from "./TextBlockQuestionBuilder";
+import {YesNoQuestionBuilder} from "./YesNoQuestionBuilder";
+import {YesNoQuestion} from "../models/questions/yesNoQuestion";
+import {QuestionBuilder} from "./QuestionBuilder";
+import {Question} from "../models/questions/question";
+import {CalendarQuestionBuilder} from "./CalendarQuestionBuilder";
+import {CalendarQuestion} from "../models/questions/calendarQuestion";
+import {MultipleChoiceQuestion} from "../models/questions/multipleChoiceQuestion";
+
+type BuilderCallBack<T extends Question> = (builder: QuestionBuilder<T>) => QuestionBuilder<T>;
 
 export class QuestionContainerBuilder {
   private description: string;
   private title: string;
   private questionEntries: QuestionContainerEntry[] = [];
 
-  public constructor(private namespace: string, private parent: QuestionaryBuilder) {
+  public constructor(private namespace: string) {
   }
 
   public withTitle(title: string) {
@@ -19,17 +30,24 @@ export class QuestionContainerBuilder {
     this.description = description;
   }
 
-  public askText(id: string): TextQuestionBuilder {
-    return new TextQuestionBuilder(id, this.namespace, this);
+  public askText(id: string, callback?: BuilderCallBack<TextQuestion>): this {
+    return this.ask(new TextQuestionBuilder(id, this.namespace), callback);
   }
 
-  public addMultipleChoiceQuestion(id: string): MultipleChoiceQuestionBuilder {
-    return null;
+  public printInfo(id: string, callback?: BuilderCallBack<TextBlockQuestion>): this {
+    return this.ask(new TextBlockQuestionBuilder(id, this.namespace), callback);
   }
 
-  public addQuestion(question: QuestionContainerEntry): QuestionContainerBuilder {
-    this.questionEntries.push(question);
-    return this;
+  public askYesNoQuestion(id: string, callback?: BuilderCallBack<YesNoQuestion>): this {
+    return this.ask(new YesNoQuestionBuilder(id, this.namespace), callback);
+  }
+
+  public askMultipleChoiceQuestion(id: string, callback?: BuilderCallBack<MultipleChoiceQuestion>): this {
+    return this.ask(new MultipleChoiceQuestionBuilder(id, this.namespace), callback);
+  }
+
+  public askForDate(id: string, callback?: BuilderCallBack<CalendarQuestion>): this {
+    return this.ask(new CalendarQuestionBuilder(id, this.namespace), callback);
   }
 
   public build(): QuestionContainer {
@@ -41,7 +59,9 @@ export class QuestionContainerBuilder {
     };
   }
 
-  public done(): QuestionaryBuilder {
-    return this.parent.addQuestionContainer(this.build());
+  private ask<Q extends Question>(builder: QuestionBuilder<Q>, callback?: BuilderCallBack<Q>): this {
+    const entry = (callback ? callback(builder) : builder).buildEntry();
+    this.questionEntries.push(entry);
+    return this;
   }
 }
