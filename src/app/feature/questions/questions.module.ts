@@ -8,6 +8,7 @@ import {QuestionaryComponent} from "./questionary/questionary.component";
 import {SharedModule} from "../../shared/shared.module";
 import {MatButtonModule, MatCardModule, MatInputModule} from "@angular/material";
 import {YesNoQuestionComponent} from "./yest-no-question/yes-no-question.component";
+import { TextBlockQuestionComponent } from './text-block-question/text-block-question.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import {YesNoQuestionComponent} from "./yest-no-question/yes-no-question.compone
     TextQuestionComponent,
     QuestionaryComponent,
     YesNoQuestionComponent,
+    TextBlockQuestionComponent,
   ],
   exports: [
     MultipleChoiceQuestionComponent,
@@ -25,6 +27,7 @@ import {YesNoQuestionComponent} from "./yest-no-question/yes-no-question.compone
     TextQuestionComponent,
     YesNoQuestionComponent,
     QuestionaryComponent,
+    TextBlockQuestionComponent,
   ],
   imports: [
     SharedModule,

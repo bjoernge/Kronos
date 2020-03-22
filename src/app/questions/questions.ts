@@ -7,7 +7,9 @@ export const part1 = buildQuestionary("part1")
       .hideIf(ctx => ctx.get("q1") === "hide")
     )
     .askYesNoQuestion("q3", f => f
-      .insteadOfYesSay("hello World!")))
+      .insteadOfYesSay("hello World!"))
+    .printInfo("q4", f => f.showHint())
+  )
   .addQuestionContainer("card2", c => c
     .askText("q3", f => f
       .hideIf(ctx => ctx.get("q1", "card1") === "hide")
