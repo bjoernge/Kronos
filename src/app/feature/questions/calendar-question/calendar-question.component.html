@@ -1,6 +1,7 @@
 <mat-form-field>
   <input [formControl]="control" [matDatepicker]="datepicker" matInput>
   <mat-datepicker-toggle [for]="datepicker" matSuffix></mat-datepicker-toggle>
+  <mat-hint>{{question.hint | translate}}</mat-hint>
 </mat-form-field>
 
 <mat-datepicker #datepicker></mat-datepicker>

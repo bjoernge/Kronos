@@ -1,7 +1,9 @@
-<h3>{{question.text}}</h3>
-<form>
-  <div *ngFor="let choice of question.choices">
-    <label [for]="'__option_' + choice.value">{{choice.text}}</label>
-    <input [formControl]="control" [id]="'__option_' + choice.value" [value]="choice.value" type="radio">
-  </div>
-</form>
+<mat-form-field>
+  <mat-label>{{question.text | translate}}</mat-label>
+  <mat-select>
+    <mat-option *ngFor="let choice of question.choices" [value]="choice.value">
+      {{choice.text | translate}}
+    </mat-option>
+  </mat-select>
+  <mat-hint>{{question.hint | translate}}</mat-hint>
+</mat-form-field>
