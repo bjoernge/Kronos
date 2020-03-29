@@ -6,12 +6,12 @@ export class YesNoQuestionBuilder extends QuestionBuilder<YesNoQuestion> {
   private noText: string = "answers.no";
 
   public insteadOfYesSay(yesText: string): this {
-    this.yesText = yesText;
+    this.yesText = `${this.namespace}.${yesText}`;
     return this;
   }
 
   public insteadOfNoSay(noText: string): this {
-    this.noText = noText;
+    this.noText = `${this.namespace}.${noText}`;
     return this;
   }
 

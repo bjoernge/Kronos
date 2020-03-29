@@ -7,7 +7,7 @@ export class MultipleChoiceQuestionBuilder extends QuestionBuilder<MultipleChoic
   private choices: Choice[] = [];
 
   public option(text: string, value: string): MultipleChoiceQuestionBuilder {
-    this.choices.push({text, value});
+    this.choices.push({text: `${this.namespace}.choices.${text}`, value});
     return this;
   }
 

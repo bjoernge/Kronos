@@ -2,6 +2,10 @@
   "app": {
     "title": "Kronos"
   },
+  "answers": {
+    "yes": "Ja",
+    "no": "Nein"
+  },
   "questions": {
     "part1": {
       "card1": {
@@ -9,7 +13,8 @@
           "text": "Was ist dein Vorname?"
         },
         "q2": {
-          "text": "Was ist dein Nachname?"
+          "text": "Was ist dein Nachname?",
+          "hint":
         }
       }
     }
