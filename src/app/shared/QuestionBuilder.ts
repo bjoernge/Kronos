@@ -25,7 +25,7 @@ export abstract class QuestionBuilder<T extends Question> {
     this.id = namespace ? `${namespace}.${id}` : id;
     this.questionContextCallback = ctx => ({
       raw: ctx,
-      get: (i: string, n?: string) => ctx[`${n || namespace}.${id}`]
+      get: (i: string, n?: string) => ctx[`${n || namespace}.${i}`]
     });
   }
 
@@ -35,7 +35,10 @@ export abstract class QuestionBuilder<T extends Question> {
   }
 
   public hideIf(callback: (context: QuestionContext) => boolean): QuestionBuilder<T> {
-    this.hiddenCondition = ctx => callback(this.questionContextCallback(ctx));
+    this.hiddenCondition = ctx => {
+      console.log({ctx, context: this.questionContextCallback(ctx), ns: this.namespace});
+      return callback(this.questionContextCallback(ctx));
+    };
 
     return this;
   }
