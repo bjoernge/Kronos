@@ -25,7 +25,7 @@ export abstract class QuestionBuilder<T extends Question> {
     this.id = namespace ? `${namespace}.${id}` : id;
     this.questionContextCallback = ctx => ({
       raw: ctx,
-      get: (i: string, n?: string) => ctx[`${n || namespace}.${i}`]
+      get: (i: string, n?: string) => ctx && ctx[`${n || namespace}.${i}`]
     });
   }
 

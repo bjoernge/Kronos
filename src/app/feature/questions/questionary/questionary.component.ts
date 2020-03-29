@@ -1,12 +1,12 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {Questionary} from '../../../models/questions/questionContainer';
-import {FormControl, FormGroup} from '@angular/forms';
-import {SafeSubscriptionComponent} from '../../../shared/safe-subscription-component';
+import {Component, Input, OnInit} from "@angular/core";
+import {Questionary} from "../../../models/questions/questionContainer";
+import {FormControl, FormGroup} from "@angular/forms";
+import {SafeSubscriptionComponent} from "../../../shared/safe-subscription-component";
 
 @Component({
-  selector: 'app-questionary',
-  templateUrl: './questionary.component.html',
-  styleUrls: ['./questionary.component.scss']
+  selector: "app-questionary",
+  templateUrl: "./questionary.component.html",
+  styleUrls: ["./questionary.component.scss"]
 })
 export class QuestionaryComponent extends SafeSubscriptionComponent implements OnInit {
 
@@ -29,7 +29,10 @@ export class QuestionaryComponent extends SafeSubscriptionComponent implements O
       new FormGroup(this.questionary.questionContainers.reduce((prev, cur) =>
         ({
           ...prev,
-          [cur.namespace]: new FormGroup(cur.questionEntries.reduce((p, c) => ({...p, [c.question.id]: new FormControl()}), {}))
+          [cur.namespace]: new FormGroup(cur.questionEntries.reduce((p, c) => ({
+            ...p,
+            [c.question.id]: new FormControl(c.defaultValue && c.defaultValue(null))
+          }), {}))
         }), {}));
 
     this.subscribe(this.formGroup.valueChanges, context => {

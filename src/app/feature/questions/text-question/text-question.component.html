@@ -1,3 +1,4 @@
 <mat-form-field>
   <input [formControl]="control" [placeholder]="question.text | translate" matInput type="text">
+  <mat-hint>{{question.hint | translate}}</mat-hint>
 </mat-form-field>
