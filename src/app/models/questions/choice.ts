@@ -1,4 +1,4 @@
-export interface Choice {
+export interface Choice<T = string> {
   text: string;
-  value: string;
+  value: T;
 }

@@ -42,7 +42,8 @@ export class QuestionContainerBuilder {
     return this.ask(new YesNoQuestionBuilder(id, this.namespace), callback);
   }
 
-  public askMultipleChoiceQuestion(id: string, callback?: BuilderCallBack<MultipleChoiceQuestion, MultipleChoiceQuestionBuilder>): this {
+  public askMultipleChoiceQuestion<T>(id: string,
+                                      callback?: BuilderCallBack<MultipleChoiceQuestion<T>, MultipleChoiceQuestionBuilder<T>>): this {
     return this.ask(new MultipleChoiceQuestionBuilder(id, this.namespace), callback);
   }
 

@@ -15,7 +15,7 @@ import {
   MatInputModule,
   MatSelectModule
 } from "@angular/material";
-import {YesNoQuestionComponent} from "./yest-no-question/yes-no-question.component";
+import {YesNoQuestionComponent} from "./yes-no-question/yes-no-question.component";
 import {TextBlockQuestionComponent} from "./text-block-question/text-block-question.component";
 import {CalendarQuestionComponent} from "./calendar-question/calendar-question.component";
 

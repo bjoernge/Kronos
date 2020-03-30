@@ -19,7 +19,7 @@ export abstract class QuestionBuilder<T extends Question> {
   protected questionContextCallback: (ctx: any) => QuestionContext;
 
 
-  public constructor(protected readonly id: string, protected namespace: string) {
+  public constructor(protected readonly id: string, protected readonly namespace: string) {
     this.text = `${namespace}.${id}.text`;
     this.hintText = null;
     this.id = namespace ? `${namespace}.${id}` : id;
@@ -29,12 +29,12 @@ export abstract class QuestionBuilder<T extends Question> {
     });
   }
 
-  public showHint(): QuestionBuilder<T> {
-    this.hintText = `${this.namespace}.${this.id}.hint`;
+  public showHint(): this {
+    this.hintText = `${this.id}.hint`;
     return this;
   }
 
-  public hideIf(callback: (context: QuestionContext) => boolean): QuestionBuilder<T> {
+  public hideIf(callback: (context: QuestionContext) => boolean): this {
     this.hiddenCondition = ctx => {
       console.log({ctx, context: this.questionContextCallback(ctx), ns: this.namespace});
       return callback(this.questionContextCallback(ctx));
@@ -43,7 +43,7 @@ export abstract class QuestionBuilder<T extends Question> {
     return this;
   }
 
-  public requireDocument(options: { name: string, description?: string, id?: string, required?: ((context: any) => boolean) | boolean }): QuestionBuilder<T> {
+  public requireDocument(options: { name: string, description?: string, id?: string, required?: ((context: any) => boolean) | boolean }): this {
     const documentRequest: DocumentRequest = {
       id: uuid(),
       description: "",
@@ -54,7 +54,7 @@ export abstract class QuestionBuilder<T extends Question> {
     return this;
   }
 
-  public defaultTo(defaultValue: ((context: QuestionContext) => string) | string): QuestionBuilder<T> {
+  public defaultTo(defaultValue: ((context: QuestionContext) => string) | string): this {
     if (typeof defaultValue === "function") {
       this.defaultValue = ctx => defaultValue(this.questionContextCallback(ctx));
     } else {

@@ -3,16 +3,16 @@ import {Choice} from "./choice";
 import {QuestionOptions} from "./questionOptions";
 import {DocumentRequest} from "./documentRequest";
 
-export class MultipleChoiceQuestion implements Question {
+export class MultipleChoiceQuestion<T = string> implements Question {
   public type = "multipleChoice";
   public hint: string;
   public id: string;
   public text: string;
-  public choices: Choice[];
+  public choices: Choice<T>[];
   public documentRequests: DocumentRequest[];
 
   public constructor(config: QuestionOptions & {
-    choices: Choice[]
+    choices: Choice<T>[]
   }) {
     config = {
       documents: [],
