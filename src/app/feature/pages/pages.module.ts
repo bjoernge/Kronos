@@ -5,7 +5,7 @@ import {AboutPageComponent} from './about-page/about-page.component';
 import {AppPageComponent} from './app-page/app-page.component';
 import {QuestionsModule} from '../questions/questions.module';
 import {AppBarModule} from '../app-bar/app-bar.module';
-import {MatToolbarModule} from '@angular/material';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 @NgModule({
   declarations: [

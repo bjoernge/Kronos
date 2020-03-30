@@ -1,7 +1,8 @@
-import {EventEmitter, Input, OnInit, Output} from '@angular/core';
+import { EventEmitter, Input, OnInit, Output, Directive } from '@angular/core';
 import {Question} from '../../models/questions/question';
 import {FormControl} from '@angular/forms';
 
+@Directive()
 export abstract class QuestionBaseComponent<TQuestion extends Question, TAnswer> implements OnInit {
 
   @Output()

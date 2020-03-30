@@ -9,7 +9,9 @@ import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {CustomMissingTranslationHandler} from "./custom-missing-translation-handler";
 import {PagesModule} from "./feature/pages/pages.module";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {MatButtonModule, MatNativeDateModule} from "@angular/material";
+import { MatButtonModule } from "@angular/material/button";
+import { MatNativeDateModule } from "@angular/material/core";
+import { StoreModule } from '@ngrx/store';
 
 
 // AoT requires an exported function for factories
@@ -41,7 +43,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     PagesModule,
     BrowserAnimationsModule,
     MatButtonModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    StoreModule.forRoot({}, {})
   ],
   providers: [],
   bootstrap: [AppComponent]
