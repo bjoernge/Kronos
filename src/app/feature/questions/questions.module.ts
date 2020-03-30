@@ -13,11 +13,13 @@ import {
   MatDatepickerModule,
   MatIconModule,
   MatInputModule,
-  MatSelectModule
+  MatSelectModule,
+  MatTooltipModule
 } from "@angular/material";
 import {YesNoQuestionComponent} from "./yes-no-question/yes-no-question.component";
 import {TextBlockQuestionComponent} from "./text-block-question/text-block-question.component";
 import {CalendarQuestionComponent} from "./calendar-question/calendar-question.component";
+import { BaseQuestionComponent } from './base-question/base-question.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,7 @@ import {CalendarQuestionComponent} from "./calendar-question/calendar-question.c
     YesNoQuestionComponent,
     TextBlockQuestionComponent,
     CalendarQuestionComponent,
+    BaseQuestionComponent,
   ],
   exports: [
     MultipleChoiceQuestionComponent,
@@ -50,7 +53,8 @@ import {CalendarQuestionComponent} from "./calendar-question/calendar-question.c
     MatDatepickerModule,
     MatIconModule,
     MatButtonToggleModule,
-    MatSelectModule
+    MatSelectModule,
+    MatTooltipModule
   ]
 })
 export class QuestionsModule {

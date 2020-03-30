@@ -1,0 +1,8 @@
+<div class="container">
+  <h3 class="mat-subheader">{{question.text | translate}}</h3>
+  <div class="question">
+    <ng-content></ng-content>
+  </div>
+  <mat-icon *ngIf="showHint && question.hint" [matTooltip]="question.hint | translate" class="hint">information
+  </mat-icon>
+</div>
