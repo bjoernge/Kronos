@@ -1,4 +1,4 @@
-import {Question} from './question';
+import {Question} from "./question";
 
 export interface Questionary {
   title: string;
@@ -10,6 +10,8 @@ export interface QuestionContainer {
   description: string;
   questionEntries: QuestionContainerEntry[];
   namespace: string;
+  nextText: string;
+  previousText: string;
 }
 
 export interface QuestionContainerEntry<T extends Question = Question> {

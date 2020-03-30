@@ -1,7 +1,8 @@
 <h1>{{questionary.title | translate}}</h1>
-<div class="card-container">
+<div #containerRef class="card-container">
   <div *ngFor="let container of questionary.questionContainers" class="card">
-    <app-question-container [context]="context" [group]="formGroup.controls[container.namespace]"
+    <app-question-container [context]="context"
+                            [group]="formGroup.controls[container.namespace]"
                             [questionContainer]="container">
     </app-question-container>
   </div>

@@ -11,4 +11,8 @@
     </ng-container>
 
   </mat-card-content>
+  <mat-card-actions>
+    <button (click)="goBack.next()" color="primary" mat-button>{{questionContainer.previousText | translate}}</button>
+    <button color="primary" mat-button>{{questionContainer.nextText | translate}}</button>
+  </mat-card-actions>
 </mat-card>

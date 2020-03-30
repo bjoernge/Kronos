@@ -6,3 +6,8 @@ mat-card {
   width: 80%;
   max-width: 800px;
 }
+
+mat-card-actions {
+  display: flex;
+  justify-content: space-between;
+}

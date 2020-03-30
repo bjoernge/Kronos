@@ -18,6 +18,8 @@ export class QuestionContainerBuilder {
   private description: string;
   private title: string;
   private questionEntries: QuestionContainerEntry[] = [];
+  private nextText: string = "app.next";
+  private previousText: string = "app.previous";
 
   public constructor(private namespace: string) {
   }
@@ -28,6 +30,14 @@ export class QuestionContainerBuilder {
 
   public withDescription(description: string) {
     this.description = description;
+  }
+
+  public insteadOfNextSay(nextText: string) {
+    this.nextText = `${this.namespace}.${nextText}`;
+  }
+
+  public insteadOfPreviousSay(previousText: string) {
+    this.nextText = `${this.namespace}.${previousText}`;
   }
 
   public askText(id: string, callback?: BuilderCallBack<TextQuestion, TextQuestionBuilder>): this {
@@ -53,6 +63,8 @@ export class QuestionContainerBuilder {
 
   public build(): QuestionContainer {
     return {
+      nextText: this.nextText,
+      previousText: this.previousText,
       namespace: this.namespace,
       description: this.description,
       title: this.title,

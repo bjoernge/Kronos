@@ -35,10 +35,7 @@ export abstract class QuestionBuilder<T extends Question> {
   }
 
   public hideIf(callback: (context: QuestionContext) => boolean): this {
-    this.hiddenCondition = ctx => {
-      console.log({ctx, context: this.questionContextCallback(ctx), ns: this.namespace});
-      return callback(this.questionContextCallback(ctx));
-    };
+    this.hiddenCondition = ctx => callback(this.questionContextCallback(ctx));
 
     return this;
   }
