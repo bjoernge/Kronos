@@ -11,17 +11,66 @@
   "questions": {
     "part1": {
       "card1": {
-        "q1": {
+        "firstname": {
           "text": "Was ist dein Vorname?"
         },
-        "q2": {
+        "name": {
           "text": "Was ist dein Nachname?"
         },
-        "q4": {
+        "q_birthname": {
+          "text": "Hast du einen anderen Geburtsnamen?"
+        },
+        "birthname": {
+          "text": "Wie lautet dein Geburtsname?",
+          "hint": "P§NIS"
+        },
+        "sex": {
+          "text": "Welches geschlecht hast du?",
+          "hint": "Das Formular lässt leider nur die beiden Geschlechter zu.",
           "choices": {
-            "option1": "Option 1",
-            "option2": "Option 2"
+            "male": "Männlich",
+            "female": "Weiblich"
           }
+        },
+        "birthdate": {
+          "text": "Wann hast du Geburtstag?"
+        },
+        "birthplace": {
+          "text": "Wo bist du geboren?",
+          "hint": "Bitte gebe in Klammern das Geburtsland an."
+        },
+        "foreveralone": {
+          "text": "Du bist?",
+          "choices": {
+            "alone": "ledig",
+            "married": "verheiratet oder in eingetragener Lebenspartnerschaft",
+            "seperated": "dauernd getrennt lebend",
+            "weathered": "verwittwert",
+            "devoced": "geschieden"
+          }
+        },
+        "status_since": {
+          "text": "Seit wann?"
+        },
+        "german_nationality": {
+          "text": "Hast du die Deutsche Staatsbürgerschaft?"
+        },
+       "nationality": {
+          "text": "Welche Staatsbrügerschaft hast du?",
+          "hint": "Bitte gebe das Kürzel an. Bspw. bei den Niederlanden Nl"
+        },
+        "partner_nationality": {
+          "text": "Welche Staatsbrügerschaft hat dein Partner?",
+          "hint": "Bitte gebe das Kürzel an. Bspw. bei den Niederlanden Nl"
+        },
+        "tax_ident": {
+          "text": "Wie lautet deine Steueridentifikationsnummer?",
+          "hint": "Wenn du schon mal gearbeitet hast, findest du diese auf deiner Lohnabrechnung sonst frage bei deinen Eltern nach. Falls sie dir auch nicht weiterhelfen können, rufe bei deinem Finanzamt an und diese schicken dir diese per Post."
+        }
+      },
+      "card2": {
+        "q_parents": {
+          "text": "Wohnst du noch bei deinen Eltern?"
         }
       }
     }
