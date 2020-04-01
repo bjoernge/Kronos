@@ -36,7 +36,7 @@ export const part1 = buildQuestionary("part1")
   .addQuestionContainer("card2", c => c
     .askYesNoQuestion("q_parents")
     .askText("q3", f => f
-      .hideIf(ctx => ctx.get("firstname", "card1") === "hide")
+      .hideIf(ctx => ctx.is_n("firstname", "card1", "hide"))
       .defaultTo("Test Q3")
     )
   )

@@ -19,7 +19,12 @@ class QuestionContextInternal implements QuestionContext {
   }
 
   public get(id: string, namespace?: string) {
-    return this.raw && this.raw[`${namespace || this.defaultNamespace}.${id}`];
+    if (namespace) {
+      const namespaceParts = namespace.split(".");
+      const defaultNameSpaceParts = this.defaultNamespace.split(".");
+      namespace = defaultNameSpaceParts.slice(0, defaultNameSpaceParts.length - namespaceParts.length).concat(namespaceParts).join(".");
+    }
+    return this.raw && this.raw[`${namespace}.${id}`];
   }
 
   public is(id: string, ...values: any[]): boolean {
