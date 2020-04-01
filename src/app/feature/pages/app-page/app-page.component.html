@@ -1,5 +1,11 @@
 <mat-toolbar>
-  Fancy tool
+  <span class="title">{{'app.title' | translate}}</span>
+  <span class="questionary-title">{{questionary.title | translate}}</span>
+  <mat-icon class="help">help</mat-icon>
 </mat-toolbar>
+<app-questionary
+  (stepChanged)="stepChanged($event)"
+  [currentStep]="currentStep$ | async"
+  [questionary]="questionary"
+  class="questionary"></app-questionary>
 
-<app-questionary [questionary]="questionary"></app-questionary>

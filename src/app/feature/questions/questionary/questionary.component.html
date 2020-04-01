@@ -1,9 +1,16 @@
-<h1>{{questionary.title | translate}}</h1>
-<div #containerRef class="card-container">
-  <div *ngFor="let container of questionary.questionContainers" class="card">
-    <app-question-container [context]="context"
-                            [group]="formGroup.controls[container.namespace]"
-                            [questionContainer]="container">
+<div class="questionary-component-progress-indicator">
+  <div *ngFor="let container of questionary.questionContainers; let i = index;" [class.active]="i == currentStep"
+       [class.done]="i < currentStep">
+  </div>
+</div>
+
+<div class="questionary-component-container">
+  <div #containerRef class="questionary-component-card-container">
+    <app-question-container (continue)="stepChanged.emit(currentStep + 1)"
+                            (goBack)="stepChanged.emit(currentStep - 1)"
+                            [context]="context"
+                            [group]="formGroup.controls[questionary.questionContainers[currentStep].namespace]"
+                            [questionContainer]="questionary.questionContainers[currentStep]">
     </app-question-container>
   </div>
 </div>

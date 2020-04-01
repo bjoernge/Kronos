@@ -7,6 +7,30 @@ interface QuestionContext {
   raw: any;
 
   get(id: string, namespace?: string);
+
+  is(id: string, ...values: any[]): boolean;
+
+  is_n(id: string, namespace: string, ...values: any[]): boolean;
+}
+
+class QuestionContextInternal implements QuestionContext {
+  constructor(public raw: any, private defaultNamespace: string) {
+
+  }
+
+  public get(id: string, namespace?: string) {
+    return this.raw && this.raw[`${namespace || this.defaultNamespace}.${id}`];
+  }
+
+  public is(id: string, ...values: any[]): boolean {
+    return this.is_n(id, this.defaultNamespace, ...values);
+  }
+
+  public is_n(id: string, namespace: string, ...values: any[]): boolean {
+    const val = this.get(id, namespace);
+    return values.some(v => v === val);
+  }
+
 }
 
 export abstract class QuestionBuilder<T extends Question> {
@@ -23,10 +47,7 @@ export abstract class QuestionBuilder<T extends Question> {
     this.text = `${namespace}.${id}.text`;
     this.hintText = null;
     this.id = namespace ? `${namespace}.${id}` : id;
-    this.questionContextCallback = ctx => ({
-      raw: ctx,
-      get: (i: string, n?: string) => ctx && ctx[`${n || namespace}.${i}`]
-    });
+    this.questionContextCallback = ctx => new QuestionContextInternal(ctx, namespace);
   }
 
   public showHint(): this {

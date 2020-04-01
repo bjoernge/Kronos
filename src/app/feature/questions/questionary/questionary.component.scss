@@ -1,11 +1,41 @@
-.card-container {
-  display: grid;
-  grid-auto-flow: column;
-  width: 100vw;
-  overflow: hidden;
+@import "~@angular/material/theming";
 
-  .card {
-    width: 90vw;
-    margin: 0 5%;
+
+@mixin questionary($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+
+  $progress-indicator-height: 6px;
+
+  .questionary-component-progress-indicator {
+    height: $progress-indicator-height;
+    display: flex;
+
+    div {
+      flex: 1;
+      background: mat-color($accent, 200);
+
+      &.done {
+        background: mat-color($primary);
+      }
+
+      &.active {
+        background: mat-color($accent);
+      }
+    }
   }
+
+  .questionary-component-container {
+    height: calc(100% - #{$progress-indicator-height});
+    overflow: auto;
+
+    .questionary-component-card-container {
+      margin-top: 64px;
+      margin-bottom: 128px;
+      display: block;
+    }
+
+  }
+
 }
+

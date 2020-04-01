@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from "@angular/core";
+import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
 import {Questionary} from "../../../models/questions/questionContainer";
 import {FormControl, FormGroup} from "@angular/forms";
 import {SafeSubscriptionComponent} from "../../../shared/safe-subscription-component";
@@ -14,6 +14,12 @@ export class QuestionaryComponent extends SafeSubscriptionComponent implements O
   public questionary: Questionary;
 
   public formGroup: FormGroup;
+
+  @Input()
+  public currentStep: number;
+
+  @Output()
+  public stepChanged: EventEmitter<number> = new EventEmitter<number>();
 
   constructor() {
     super();
@@ -52,5 +58,4 @@ export class QuestionaryComponent extends SafeSubscriptionComponent implements O
       }
     });
   }
-
 }

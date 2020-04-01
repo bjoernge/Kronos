@@ -1,28 +1,23 @@
-import {NgModule} from '@angular/core';
-import {MainPageComponent} from './main-page/main-page.component';
-import {SharedModule} from '../../shared/shared.module';
-import {AboutPageComponent} from './about-page/about-page.component';
-import {AppPageComponent} from './app-page/app-page.component';
-import {QuestionsModule} from '../questions/questions.module';
-import {AppBarModule} from '../app-bar/app-bar.module';
-import { MatToolbarModule } from '@angular/material/toolbar';
+import {NgModule} from "@angular/core";
+import {MainPageComponent} from "./main-page/main-page.component";
+import {SharedModule} from "../../shared/shared.module";
+import {AboutPageComponent} from "./about-page/about-page.component";
+import {AppBarModule} from "../app-bar/app-bar.module";
+import {AppPageModule} from "./app-page/app-page.module";
 
 @NgModule({
   declarations: [
     MainPageComponent,
-    AboutPageComponent,
-    AppPageComponent
+    AboutPageComponent
   ],
   imports: [
     SharedModule,
-    QuestionsModule,
     AppBarModule,
-    MatToolbarModule
+    AppPageModule
   ],
   exports: [
     MainPageComponent,
-    AboutPageComponent,
-    AppPageComponent
+    AboutPageComponent
   ]
 })
 export class PagesModule {

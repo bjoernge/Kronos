@@ -3,6 +3,7 @@
   <div class="question">
     <ng-content></ng-content>
   </div>
-  <mat-icon *ngIf="showHint && question.hint" [matTooltip]="question.hint | translate" class="hint">information
+  <mat-icon *ngIf="showHint && question.hint" [matTooltip]="question.hint | translate" class="hint" color="accent">
+    information
   </mat-icon>
 </div>

@@ -1,8 +1,10 @@
 import {buildQuestionary} from "../shared/QuestionaryBuilder";
+
 export enum Gender {
   Male,
   Female,
 }
+
 export const part1 = buildQuestionary("part1")
   .addQuestionContainer("card1", c => c
     .askText("firstname")
@@ -14,17 +16,21 @@ export const part1 = buildQuestionary("part1")
     .askMultipleChoiceQuestion("sex", c => c.option("male", "Gender.Male").option("female", "1"))
     .askForDate("birthdate", f => f.showAsPopup())
     .askText("birthplace", f => f.showHint())
-    .askMultipleChoiceQuestion("foreveralone", c => c.option("alone", "1").option("married", "2").option("seperated", "3")
-      .option("weathered", "4").option("devoced", "5"))
+    .askMultipleChoiceQuestion("foreveralone", c => c
+      .option("alone", 1)
+      .option("married", 2)
+      .option("seperated", 3)
+      .option("weathered", 4)
+      .option("divorced", 5))
     .askForDate("status_since", f => f
-      .hideIf(ctx => ctx.get("foreveralone") === 1 || ctx.get("foreveralone") === null)
+      .hideIf(ctx => ctx.is("foreveralone", 1, null))
       .showAsPopup())
     .askYesNoQuestion("german_nationality")
     .askText("nationality", f => f
       .hideIf(ctx => ctx.get("german_nationality") !== false)
       .showHint())
     .askText("partner_nationality", f => f
-      .hideIf(ctx => ctx.get("foreveralone") === "5"))
+      .hideIf(ctx => ctx.is("foreveralone", 1, 3, 4, null)))
     .askText("tax_ident", f => f.showHint())
   )
   .addQuestionContainer("card2", c => c
