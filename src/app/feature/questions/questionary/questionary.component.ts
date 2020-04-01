@@ -1,12 +1,14 @@
-import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
+import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from "@angular/core";
 import {Questionary} from "../../../models/questions/questionContainer";
 import {FormControl, FormGroup} from "@angular/forms";
 import {SafeSubscriptionComponent} from "../../../shared/safe-subscription-component";
+import {prevCurNextAnimation} from "./questionary.animation";
 
 @Component({
   selector: "app-questionary",
   templateUrl: "./questionary.component.html",
-  styleUrls: ["./questionary.component.scss"]
+  styleUrls: ["./questionary.component.scss"],
+  animations: [prevCurNextAnimation]
 })
 export class QuestionaryComponent extends SafeSubscriptionComponent implements OnInit {
 
@@ -20,6 +22,10 @@ export class QuestionaryComponent extends SafeSubscriptionComponent implements O
 
   @Output()
   public stepChanged: EventEmitter<number> = new EventEmitter<number>();
+  public state: "next" | "cur" | "prev" = "cur";
+
+  @ViewChild("containerRef")
+  public containerRef: ElementRef;
 
   constructor() {
     super();
@@ -57,5 +63,18 @@ export class QuestionaryComponent extends SafeSubscriptionComponent implements O
         }
       }
     });
+  }
+
+  public animationStarting() {
+    this.containerRef.nativeElement.scrollTo({top: 0, behavior: "smooth"});
+  }
+
+  public animationDone() {
+    if (this.state === "cur") {
+      return;
+    }
+
+    this.stepChanged.emit(this.currentStep + (this.state === "next" ? 1 : -1));
+    this.state = "cur";
   }
 }

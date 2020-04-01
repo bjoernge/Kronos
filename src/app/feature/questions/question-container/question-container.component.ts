@@ -10,12 +10,17 @@ import {SafeSubscriptionComponent} from "../../../shared/safe-subscription-compo
 @Component({
     selector: "app-question-container",
     templateUrl: "./question-container.component.html",
-    styleUrls: ["./question-container.component.scss"]
+    styleUrls: ["./question-container.component.scss"],
 })
 export class QuestionContainerComponent extends SafeSubscriptionComponent {
 
     @Input()
     public questionContainer: QuestionContainer;
+
+    @Input()
+    public allowNext = false;
+    @Input()
+    public allowPrevious = false;
 
     @Input()
     public context: any;

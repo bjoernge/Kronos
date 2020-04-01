@@ -4,13 +4,35 @@
   </div>
 </div>
 
-<div class="questionary-component-container">
-  <div #containerRef class="questionary-component-card-container">
-    <app-question-container (continue)="stepChanged.emit(currentStep + 1)"
-                            (goBack)="stepChanged.emit(currentStep - 1)"
-                            [context]="context"
-                            [group]="formGroup.controls[questionary.questionContainers[currentStep].namespace]"
-                            [questionContainer]="questionary.questionContainers[currentStep]">
+<div #containerRef class="questionary-component-container">
+  <div (@prevCurNext.done)="animationDone()" (@prevCurNext.start)="animationStarting()"
+       [@prevCurNext]="state"
+       class="questionary-component-card-container">
+    <app-question-container
+      *ngIf="currentStep > 0"
+      [context]="context"
+      [group]="formGroup.controls[questionary.questionContainers[currentStep - 1].namespace]"
+      [questionContainer]="questionary.questionContainers[currentStep - 1]"
+      class="previous-question-container">
+    </app-question-container>
+    <app-question-container
+      (continue)="state = 'next'"
+      (goBack)="state = 'prev'"
+      [allowNext]="currentStep < questionary.questionContainers.length - 1"
+      [allowPrevious]="currentStep > 0"
+      [context]="context"
+      [group]="formGroup.controls[questionary.questionContainers[currentStep].namespace]"
+      [questionContainer]="questionary.questionContainers[currentStep]"
+      class="current-question-container">
+    </app-question-container>
+    <app-question-container
+      (continue)="stepChanged.emit(currentStep + 1)"
+      (goBack)="stepChanged.emit(currentStep - 1)"
+      *ngIf="currentStep < questionary.questionContainers.length - 1"
+      [context]="context"
+      [group]="formGroup.controls[questionary.questionContainers[currentStep + 1].namespace]"
+      [questionContainer]="questionary.questionContainers[currentStep + 1]"
+      class="next-question-container">
     </app-question-container>
   </div>
 </div>

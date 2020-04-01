@@ -13,14 +13,14 @@
 
     div {
       flex: 1;
-      background: mat-color($accent, 200);
+      background: mat-color($accent, 100);
 
       &.done {
-        background: mat-color($primary);
+        background: mat-color($accent, 400);
       }
 
       &.active {
-        background: mat-color($accent);
+        background: mat-color($accent, 600);
       }
     }
   }
@@ -32,9 +32,27 @@
     .questionary-component-card-container {
       margin-top: 64px;
       margin-bottom: 128px;
-      display: block;
-    }
+      overflow: hidden;
+      position: relative;
 
+      .next-question-container, .previous-question-container {
+        display: none;
+        position: absolute;
+        top: 0;
+      }
+
+      .previous-question-container {
+        left: -100%;
+      }
+
+      .current-question-container {
+        display: block;
+      }
+
+      .next-question-container {
+        right: -100%;
+      }
+    }
   }
 
 }
