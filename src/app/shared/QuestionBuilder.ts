@@ -23,6 +23,8 @@ class QuestionContextInternal implements QuestionContext {
       const namespaceParts = namespace.split(".");
       const defaultNameSpaceParts = this.defaultNamespace.split(".");
       namespace = defaultNameSpaceParts.slice(0, defaultNameSpaceParts.length - namespaceParts.length).concat(namespaceParts).join(".");
+    } else {
+      namespace = this.defaultNamespace;
     }
     return this.raw && this.raw[`${namespace}.${id}`];
   }

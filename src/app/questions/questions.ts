@@ -9,10 +9,10 @@ export const part1 = buildQuestionary("part1")
   .addQuestionContainer("card1", c => c
     .askText("firstname")
     .askText("name", f => f
-      .hideIf(ctx => ctx.get("q1") === "hide"))
+      .hideIf(ctx => ctx.is("q1", "hide")))
     .askYesNoQuestion("q_birthname")
     .askText("birthname", f => f
-      .hideIf(ctx => ctx.get("q_birthname") !== true))
+      .hideIf(ctx => ctx.is("q_birthname", false, null)))
     .askMultipleChoiceQuestion("sex", c => c.option("male", "Gender.Male").option("female", "1"))
     .askForDate("birthdate", f => f.showAsPopup())
     .askText("birthplace", f => f.showHint())
