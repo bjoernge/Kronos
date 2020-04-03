@@ -46,7 +46,7 @@
             "married": "verheiratet oder in eingetragener Lebenspartnerschaft",
             "seperated": "dauernd getrennt lebend",
             "weathered": "verwittwert",
-            "devoced": "geschieden"
+            "divorced": "geschieden"
           }
         },
         "status_since": {
@@ -69,8 +69,54 @@
         }
       },
       "card2": {
+        "main_adress": {
+          "text": "Hierbei geht es um deinen Hauptwohsitz (zum Beispiel bei deinen Eltern)"
+        },
         "q_parents": {
           "text": "Wohnst du noch bei deinen Eltern?"
+        },
+        "street":{
+          "text": "Wie lautet Strasse und Hausnummer?"
+        },
+        "zip": {
+          "text": "Wie lautet die Postleitzahl?"
+        },
+        "city": {
+          "text": "In welcher Stadt?"
+        },
+        "bell": {
+          "text": "Bei?",
+          "hint": "Welcher Name steht auf dem Klingelschild drauf?"
+        },
+        "know_adress": {
+          "text": "Kennst du deine Adresse, die du während deiner Ausbildung (Schule oder Studium) hast? "
+        },
+        "sec_adress": {
+          "text": "Hierbei geht es um deine Adresse an deinem Ausbildungsort (Schule, Studium)"
+        },
+        "out_of_country": {
+          "text": "In welchem Land?",
+          "hint": "Bitte gebe das Kürzel an. Bspw. bei den Niederlanden Nl"
+        },
+        "sec_street":{
+          "text": "Wie lautet Strasse und Hausnummer?"
+        },
+        "sec_zip": {
+          "text": "Wie lautet die Postleitzahl?"
+        },
+        "sec_city": {
+          "text": "In welcher Stadt?"
+        },
+        "sec_bell": {
+          "text": "Bei?",
+          "hint": "Welcher Name steht auf dem Klingelschild drauf?"
+        },
+        "sec_out_of_country": {
+          "text": "In welchem Land?",
+          "hint": "Bitte gebe das Kürzel an. Bspw. bei den Niederlanden Nl"
+        },
+        "post": {
+          "text": "Wo soll die Post hin?"
         }
       }
     }
