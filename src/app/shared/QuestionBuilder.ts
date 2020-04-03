@@ -2,16 +2,7 @@ import {Question} from "../models/questions/question";
 import {QuestionContainerEntry} from "../models/questions/questionContainer";
 import {DocumentRequest} from "../models/questions/documentRequest";
 import {v4 as uuid} from "uuid";
-
-interface QuestionContext {
-  raw: any;
-
-  get(id: string, namespace?: string);
-
-  is(id: string, ...values: any[]): boolean;
-
-  is_n(id: string, namespace: string, ...values: any[]): boolean;
-}
+import {QuestionContext} from "./QuestionContext";
 
 class QuestionContextInternal implements QuestionContext {
   constructor(public raw: any, private defaultNamespace: string) {
@@ -63,7 +54,7 @@ export abstract class QuestionBuilder<T extends Question> {
   }
 
   public hideIf(callback: (context: QuestionContext) => boolean): this {
-    this.hiddenCondition = ctx => callback(this.questionContextCallback(ctx));
+    this.hiddenCondition = this.contextCallback(callback);
 
     return this;
   }
@@ -97,5 +88,9 @@ export abstract class QuestionBuilder<T extends Question> {
       defaultValue: this.defaultValue,
       isHidden: this.hiddenCondition
     };
+  }
+
+  protected contextCallback(callback: (context: QuestionContext) => boolean): (ctx) => boolean {
+    return ctx => callback(this.questionContextCallback(ctx));
   }
 }

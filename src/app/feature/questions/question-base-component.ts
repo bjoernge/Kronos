@@ -1,31 +1,35 @@
-import { EventEmitter, Input, OnInit, Output, Directive } from '@angular/core';
-import {Question} from '../../models/questions/question';
-import {FormControl} from '@angular/forms';
+import {Directive, EventEmitter, Input, OnInit, Output} from "@angular/core";
+import {Question} from "../../models/questions/question";
+import {FormControl} from "@angular/forms";
 
 @Directive()
 export abstract class QuestionBaseComponent<TQuestion extends Question, TAnswer> implements OnInit {
 
-  @Output()
-  public questionAnswered: EventEmitter<TAnswer> = new EventEmitter<TAnswer>();
 
-  @Input()
-  public question: TQuestion;
+    @Input()
+    public context: any;
 
-  @Input()
-  public control: FormControl;
+    @Output()
+    public questionAnswered: EventEmitter<TAnswer> = new EventEmitter<TAnswer>();
 
-  public ngOnInit(): void {
-  }
+    @Input()
+    public question: TQuestion;
 
-  protected answer(answer?: TAnswer): void {
-    if (answer === undefined) {
-      answer = this.control.value;
+    @Input()
+    public control: FormControl;
+
+    public ngOnInit(): void {
     }
 
-    this.questionAnswered.emit(answer);
-  }
+    protected answer(answer?: TAnswer): void {
+        if (answer === undefined) {
+            answer = this.control.value;
+        }
 
-  protected reset(): void {
-    this.control.reset();
-  }
+        this.questionAnswered.emit(answer);
+    }
+
+    protected reset(): void {
+        this.control.reset();
+    }
 }

@@ -2,9 +2,11 @@
   <mat-form-field>
     <mat-label>{{question.text | translate}}</mat-label>
     <mat-select [formControl]="control">
-      <mat-option *ngFor="let choice of question.choices" [value]="choice.value">
-        {{choice.text | translate}}
-      </mat-option>
+      <ng-container *ngFor="let choice of question.choices">
+        <mat-option *ngIf="!(choice.hideIf && choice.hideIf(context))" [value]="choice.value">
+          {{choice.text | translate}}
+        </mat-option>
+      </ng-container>
     </mat-select>
   </mat-form-field>
 </app-base-question>

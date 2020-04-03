@@ -1,13 +1,14 @@
 import {QuestionBuilder} from "./QuestionBuilder";
 import {MultipleChoiceQuestion} from "../models/questions/multipleChoiceQuestion";
 import {Choice} from "../models/questions/choice";
+import {QuestionContext} from "./QuestionContext";
 
 export class MultipleChoiceQuestionBuilder<T = any> extends QuestionBuilder<MultipleChoiceQuestion<T>> {
 
   private choices: Choice<T>[] = [];
 
-  public option(text: string, value: T): MultipleChoiceQuestionBuilder {
-    this.choices.push({text: `${this.id}.choices.${text}`, value});
+  public option(text: string, value: T, hideIf?: (context: QuestionContext) => boolean): MultipleChoiceQuestionBuilder {
+    this.choices.push({text: `${this.id}.choices.${text}`, value, hideIf: hideIf && this.contextCallback(hideIf)});
     return this;
   }
 
