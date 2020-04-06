@@ -67,7 +67,6 @@ export const part1 = buildQuestionary("part1")
       .showHint())
     .askYesNoQuestion("children", f => f
       .showHint())
-    .askText("tax_ident", f => f.showHint())
   )
 
   .addQuestionContainer("mine_adress", c => c
@@ -144,4 +143,24 @@ export const part1 = buildQuestionary("part1")
     .askText("other_amount", c => c
       .hideIf(ctx => ctx.is("other", false, null)))
   ) 
+
+  .addQuestionContainer("general", c => c
+      .printInfo("money_info")
+      .askYesNoQuestion("your_acc", f => f
+          .defaultTo(true))
+      .askText("whose_acc", f => f
+          .hideIf(ctx => ctx.is("your_acc", true)))
+      .askText("money_inst")
+      .askText("iban")
+      .askText("blz")
+      .askText("tax_ident", f => f.
+        showHint())
+      // TODO: IMPLEMENT LOGIC
+      .askMultipleChoiceQuestion("post", f => f
+        .option("me_main", 1)
+        .option("me_sec", 2)
+        .option("mother", 3)
+        .option("father", 4)
+        .option("custodian", 5))
+    )
   .build();

@@ -70,7 +70,7 @@ export abstract class QuestionBuilder<T extends Question> {
     return this;
   }
 
-  public defaultTo(defaultValue: ((context: QuestionContext) => string) | string): this {
+  public defaultTo(defaultValue: ((context: QuestionContext) => any) | any): this {
     if (typeof defaultValue === "function") {
       this.defaultValue = ctx => defaultValue(this.questionContextCallback(ctx));
     } else {

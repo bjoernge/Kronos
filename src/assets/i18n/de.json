@@ -111,10 +111,6 @@
         "children": {
           "text": "Hast du Kinder?",
           "hint": "Gemeint sind eheliche und für ehelich erklärte, adoptierte sowie nichteheliche Kinder jeden Alters"
-        },
-        "tax_ident": {
-          "text": "Wie lautet deine Steueridentifikationsnummer?",
-          "hint": "Wenn du schon mal gearbeitet hast, findest du diese auf deiner Lohnabrechnung sonst frage bei deinen Eltern nach. Falls sie dir auch nicht weiterhelfen können, rufe bei deinem Finanzamt an und diese schicken dir diese per Post."
         }
       },
       "mine_adress": {
@@ -241,6 +237,40 @@
         },
         "other_amount": {
           "text": "Die Höhe der sonstigen Vermögensgegenstände"
+        }
+      },
+      "general": {
+        "money_info": {
+          "text": "Hierbei geht es um die Kontodaten auf den das BAföG gezahlt werden soll."
+        },
+        "your_acc": {
+          "text": "Handelt es sich um dein Konto?"
+        },
+        "whose_acc": {
+          "text": "Wem gehört das Konto?"
+        },
+        "money_inst": {
+          "text": "Wie lautet der Name des Geldinstitus?"
+        },
+        "iban": {
+          "text": "Wie lautet die IBAN?"
+        },
+        "blz": {
+          "text": "Wie lautet die Bankleitzahl?"
+        },
+        "tax_ident": {
+          "text": "Wie lautet deine Steueridentifikationsnummer?",
+          "hint": "Wenn du schon mal gearbeitet hast, findest du diese auf deiner Lohnabrechnung sonst frage bei deinen Eltern nach. Falls sie dir auch nicht weiterhelfen können, rufe bei deinem Finanzamt an und diese schicken dir diese per Post."
+        },
+        "post": {
+          "text": "Wo soll die Post hingesendet werden?",
+          "choices": {
+            "me_main": "Mich (Hauptwohnsitz)",
+            "me_sec": "Mich (Adresse am Ausbildungsort)",
+            "mother": "Mutter",
+            "father": "Vater",
+            "custodian": "Sorgeberechtigten"
+          }
         }
       }
     }
