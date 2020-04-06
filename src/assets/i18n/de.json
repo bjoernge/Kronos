@@ -10,7 +10,56 @@
   },
   "questions": {
     "part1": {
-      "card1": {
+      "intro": {
+        "phase": {
+          "text": "Was bist du für den Zeitraum in dem du BAföG beantragst?",
+          "choices":{
+            "school": "Schüler",
+            "uni": "Student",
+            "practical": "In einer Ausbildung / Praktikum"
+          }
+        },
+        "start_date": {
+          "text": "Ab wann möchtest du BAföG beantragen?",
+          "hint": "Sinnvolles..."
+        },
+        "time": {
+          "text": "Für wie viele Monate möchtest du BAfÖG beantragen?",
+          "hint": "In der Regel sind es 12 Monate",
+          "choices": {
+            "1": "1 Monat",
+            "2": "2 Monate",
+            "3": "3 Monate",
+            "4": "4 Monate",
+            "5": "5 Monate",
+            "6": "6 Monate",
+            "7": "7 Monate",
+            "8": "8 Monate",
+            "9": "9 Monate",
+            "10": "10 Monate",
+            "11": "11 Monate",
+            "12": "12 Monate"
+          }
+        },
+        "aboard": {
+          "text": "Hast du vor in dem Zeitraum in dem du BAföG beantragst ins Ausland zu gehen?"
+        },
+        "parents": {
+          "text": "Beantragst du Elternunabhängiges BAföG (bitte lese hierzu den Hinweis!) ?",
+          "hint": "HINTS TEXT"
+        }, 
+        "firsttime": {
+          "text": "Hast du schon Mal BAföG beantragt?",
+          "hint": "Bild vom Bescheid"
+        },
+        "institute": {
+          "text": "Bei welchem Amt hast du den Antrag gestellt?"
+        },
+        "number": {
+          "text": "Wie lautet deine bisherige Amts- und Föderungsnummer?"
+        }
+      },
+      "about_me": {
         "firstname": {
           "text": "Was ist dein Vorname?"
         },
@@ -59,21 +108,21 @@
           "text": "Welche Staatsbrügerschaft hast du?",
           "hint": "Bitte gebe das Kürzel an. Bspw. bei den Niederlanden Nl"
         },
-        "partner_nationality": {
-          "text": "Welche Staatsbrügerschaft hat dein Partner?",
-          "hint": "Bitte gebe das Kürzel an. Bspw. bei den Niederlanden Nl"
+        "children": {
+          "text": "Hast du Kinder?",
+          "hint": "Gemeint sind eheliche und für ehelich erklärte, adoptierte sowie nichteheliche Kinder jeden Alters"
         },
         "tax_ident": {
           "text": "Wie lautet deine Steueridentifikationsnummer?",
           "hint": "Wenn du schon mal gearbeitet hast, findest du diese auf deiner Lohnabrechnung sonst frage bei deinen Eltern nach. Falls sie dir auch nicht weiterhelfen können, rufe bei deinem Finanzamt an und diese schicken dir diese per Post."
         }
       },
-      "card2": {
+      "mine_adress": {
         "main_adress": {
           "text": "Hierbei geht es um deinen Hauptwohsitz (zum Beispiel bei deinen Eltern)"
         },
         "q_parents": {
-          "text": "Wohnst du noch bei deinen Eltern?"
+          "text": "Wohnst du bei deinen Eltern?"
         },
         "street":{
           "text": "Wie lautet Strasse und Hausnummer?"
@@ -117,6 +166,81 @@
         },
         "post": {
           "text": "Wo soll die Post hin?"
+        },
+        "prop_of_parents": {
+          "text": "Gehört deinen Eltern die Wohnung bzw. das Objekt, das du bewohnst?"
+        }
+      },
+      "capital": {
+        "capital": {
+          "text": "Vermögen"
+        },
+        "bar": {
+          "text": "Besitzt du momentan Barvermögen in Höhe von mehr als 1€?"
+        },
+        "bar_amount": {
+          "text": "Die momentane Höhe deines Barvermögens"
+        },
+        "bank": {
+          "text": "Besitzt du momentan Bank- und Sparguthaben in Höhe von mehr als 1€?"
+        },
+        "bank_amount": {
+          "text": "Die momentane Höhe deines Bank- und Sparguthaben"
+        },
+        "building_savings": {
+          "text": "Besitzt du momentan Bauspar- und Prämiensparguthaben?"
+        },
+        "building_savings_amount": {
+          "text": "Die momentane Höhe deines Bauspar- und Prämiensparguthaben"
+        },
+        "retirement": {
+          "text": "Zahlst Du momentan über Deinen Arbeitgeber in eine Betriebsrente, Riester-Rente oder Pensionskasse ein?"
+        },
+        "retirement_amount": {
+          "text": "Die Höhe von der bisher eingezahlten Altersvorsorge"
+        },
+        "kfz": {
+          "text": "Besitzt du ein Kfz? (also Auto, Motorrad usw.)?"
+        },
+        "kfz_amount": {
+          "text": "Gebe bitte hier den Zeitwert der Fahrzeuge an.",
+          "hint": "Etwas sinnvolles zum Zeitwert"
+        }, 
+        "stocks": {
+          "text": "Besitzt Du Betriebsanteile, Wertpapiere oder Lebensversicherungen?"
+        },
+        "buisness_assets": {
+          "text": "Die Höhe deines Betriebsvermögens (auch Miteigentumsanteile; Zeitwert)",
+          "hint": "Hier muss deifinitiv was hin!"
+        },
+        "stock": {
+          "text": "Die Höhe deiner Wertpapiere (z. B. Aktien, Pfandbriefe, Schatzanweisungen, Wechsel, Schecks; Kurswert)",
+          "hint": "Hier ist der Kurswert im Zeitpunkt der Antragstellung maßgeblich."
+        },
+        "land": {
+          "text": "Besitzt Du Grundstücke oder Miteigentumsanteile?"
+        },
+        "forest": {
+          "text": "Land- und forstwirtschaftliche Grundstücke (auch Miteigentumsanteile; Zeitwert)",
+          "hint": "lorem impus"
+        },
+        "vacant": {
+          "text": "Sonstige unbebaute Grundstücke (auch Miteigentumsanteile; Zeitwert)",
+          "hint": ""
+        },
+        "built": {
+          "text": "Sonstige bebaute Grundstücke, Eigentumswohnungen oder Eigenheime (auch Miteigentumsanteile; zum Zeitwert)",
+          "hint": ""
+        },
+        "other": {
+          "text": "Hast du im moment Vermögensgegenstände, die du nicht den anderen Angabemöglichkeiten zuordnen kannst?"
+        },
+        "pension": {
+          "text": "Forderungen und sonstige Rechte",
+          "hint": "blub"
+        },
+        "other_amount": {
+          "text": "Die Höhe der sonstigen Vermögensgegenstände"
         }
       }
     }
