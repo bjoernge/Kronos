@@ -143,6 +143,81 @@ export const part1 = buildQuestionary("part1")
     .askText("other_amount", c => c
       .hideIf(ctx => ctx.is("other", false, null)))
   ) 
+  .addQuestionContainer("income", c => c
+    .printInfo("you_will")
+    .askYesNoQuestion("intership")
+    .askText("intership_amount", f => f
+      .hideIf(ctx => ctx.is("intership", false, null))
+      .showHint())
+    .askYesNoQuestion("holiday")
+    .askText("holiday_amount", f => f
+      .hideIf(ctx => ctx.is("holiday", false, null))
+      .showHint())
+    .askYesNoQuestion("service", f => f
+      .hideIf(ctx => ctx.is("holiday", false, null) && ctx.is("intership", false, null))
+      .showHint())
+    .askYesNoQuestion("independence")
+    .askText("independence_amount", f => f
+      .hideIf(ctx => ctx.is("independence", false, null)))
+    .askYesNoQuestion("capital")
+    .askText("capital_amount", f => f
+      .hideIf(ctx => ctx.is("capital", false, null))
+      .showHint())
+    .askYesNoQuestion("sholarship")
+    .askText("sholarship_amount", f => f
+      .hideIf(ctx => ctx.is("sholarship", false, null)))
+    .askYesNoQuestion("bafog_regulation")
+    .askText("bafog_regulation_amount", f => f
+      .hideIf(ctx => ctx.is("bafog_regulation", false, null))
+      .showHint())
+    .askYesNoQuestion("children_entertains", f => f
+      .hideIf(ctx => ctx.is_n("about_me", "children", false)))
+    .askText("children_entertains_amount", f => f
+      .hideIf(ctx => ctx.is("children_entertains", false, null))
+      .showHint())
+    .askYesNoQuestion("partner_entertains", f => f
+      .hideIf(ctx => ctx.is_n("about_me", "foreveralone", 1, 3, 4, 5)))
+    .askText("partner_entertains_amount", f => f
+      .hideIf(ctx => ctx.is("partner_entertains", false, null))
+      .showHint())
+    .askYesNoQuestion("ex_partner_entertains")
+    .askText("ex_partner_entertains_amount", f => f
+      .hideIf(ctx => ctx.is("ex_partner_entertains", false, null))
+      .showHint())
+    .askYesNoQuestion("support")
+    .askText("support_amount", f => f
+      .hideIf(ctx => ctx.is("support", false, null))
+      .showHint())
+    .askText("other", f => f
+      .hideIf(ctx => ctx.is("support", false, null)))
+    .askYesNoQuestion("rister")
+    .askText("rister_amount", f => f
+      .hideIf(ctx => ctx.is("rister", false, null))
+      .showHint())
+    .askYesNoQuestion("pension")
+    .askText("pension_amount", f => f
+      .hideIf(ctx => ctx.is("pension", false, null))
+      .showHint())
+    .askText("other_pension", f => f
+      .hideIf(ctx => ctx.is("pension", false, null)))
+    .askYesNoQuestion("social")
+    .askText("social_info", f => f
+      .hideIf(ctx => ctx.is("social", false, null))
+      .showHint())    
+    )
+
+  .addQuestionContainer("debts", c => c
+    .printInfo("debt")
+    .askYesNoQuestion("mortgage")
+    .askText("mortgage_amount", f => f
+      .hideIf(ctx => ctx.is("mortgage", false, null)))
+    .askYesNoQuestion("repeat")
+    .askText("repeat_amount", f => f
+      .hideIf(ctx => ctx.is("repeat", false, null)))
+    .askYesNoQuestion("other")
+    .askText("other_amount", f => f
+      .hideIf(ctx => ctx.is("other", false, null))
+      .showHint()))
 
   .addQuestionContainer("general", c => c
       .printInfo("money_info")

@@ -239,6 +239,134 @@
           "text": "Die Höhe der sonstigen Vermögensgegenstände"
         }
       },
+      "income": {
+        "you_will": {
+          "text": "Wirst du für den Zeitraum in dem du BAföG beantragst..."
+        },
+        "intership": {
+          "text": "Ausbildungs- und Praktikumsvergütung oder Sachbezüge erhalten?"
+        },
+        "intership_amount": {
+          "text": "Bruttosumme Ausbildungs- und Praktikumsvergütung (auch Sachbezüge)",
+          "hint": "Die Ausbildungsvergütung umfasst auch Zuschüsse wie Essensgeld, Mietzuschüsse und Sachbezüge (z.B. freie Unterkunft und Verpflegung). Bei Sachbezügen sind stets die tatsächlichen Werte anzugeben."
+        },
+        "holiday": {
+          "text": "Einnahmen aus Ferien- und Gelegenheitsarbeiten, Mini-Jobs oder bestehenden und ruhenden Arbeitsverhältnissen haben?"
+        },
+        "holiday_amount": {
+          "text": "Voraussichtliche Brutto-Einnahmen aus bestehenden oder ruhenden Arbeitsverhältnissen, Ferien-, Gelegenheitsarbeiten, Mini-Jobs",
+          "hint": "Hier sind auch die Bezüge zu erfassen, welche du aus einer Beurlaubung für Dein Studium erhälst. Auch Einkünfte aus Minijobs sind zu erfassen. Steuern, Pauschalbeträge und Sozialbeiträge werden vom BAföG-Amt automatisch berücksichtigt."
+        },
+        "service": {
+          "text": "von deinem Arbeitgeber vermögenswirksame Leistungen erhalten?",
+          "hint": "Vermögenswirksame Leistungen sind Beiträge, die der Arbeitnehmer (zusätzlich) zum Gehalt für den Arbeitnehmer/die Arbeitnehmerin zahlt (z.B. in Form von Bausparverträgen oder dem vergeben von Beteiligungen an dem Unternehmen)."
+        },
+        "independence": {
+          "text": "Einnahmen aus selbständiger Arbeit, Gewerbebetrieb, Vermietung und Verpachtung oder Land- und Forstwirtschaft erhalten?"
+        },
+        "independence_amount": {
+          "text": "Bruttoeinkünfte aus selbständiger Arbeit, Gewerbebetrieb, Vermietung und Verpachtung, Land- und Forstwirtschaft "
+        },
+        "capital": {
+          "text": "Einkünfte aus Kapitalvermögen (z.B. Sparzinsen oder Dividenden) erhalten?"
+        },
+        "capital_amount": {
+          "text": "Bruttoeinkünfte aus Kapitalvermögen (z.B. Sparzinsen, Dividenden)",
+          "hint": "Bei gewissen Zinserträgen zieht die Bank automatisch 25% Kapitalertragssteuer ab. Anzugeben sind hier allerdings immer die Bruttoeinkünfte, d.h vor Abzug der Steuer. Du kannst den Bruttobetrag in der Regel dem Kontoauszug oder der Zinsübersiht, die Du von der Bank erhälst, entnehmen. Solltest Du Dir nicht sicher sein, ruf doch einfach bei Deiner Bank an und frage nach, ob Kapitalertragsstuer abgezogen wurde."
+        },
+        "sholarship": {
+          "text": "Zuwendungen von Firmen oder privaten Stiftungen (z. B. Stipendien) erhalten?"
+        },
+        "sholarship_amount": {
+          "text": "Höhe der Zuwendung"
+        },
+        "bafog_regulation": {
+          "text": "Einnahmen aus Arbeitslosengeld, Insolvenzgeld, Kurzarbeitergeld, Gründerzuschüssen, Mutterschaftsgeld oder Wehrsold-Abfindungen haben?"
+        },
+        "bafog_regulation_amount": {
+          "text": "Summe aller Einnahmen",
+          "hint": ""
+        },
+        "children_entertains": {
+          "text": "du Einnahmen die zu Unterhaltsdeckung deines Kindes bestimmt sind?"
+        },
+        "children_entertains_amount": {
+          "text": "Gib dir Summe der Monatlichen Unterhaltszahlung an",
+          "hint": "z.B. Familienzuschläge zur (Ausbildungs-)vergütung (nicht Kindergeld)."
+        },
+        "partner_entertains": {
+          "text": "Hast du Einnahmen die zur Unterhaltsdeckung deines Partners bestimmt sind?"
+        },
+        "partner_entertains_amount": {
+          "text": "Gib dir Summe der Monatlichen Unterhaltszahlung an",
+          "hint": "z.B. Familienzuschläge zur (Ausbildungs-)vergütung"
+        },
+        "ex_partner_entertains": {
+          "text": "Unterhaltsleistungen von dauernd von mir getrennt lebenden oder deines geschiedenen Ehegatten bzw. nicht mehr verbundenen eingetragenen Lebenspartners oder sonstiger unterhaltspflichtiger Personen (nicht deiner Eltern)"
+        },
+        "ex_partner_entertains_amount": {
+          "text": "Gib dir Summe der Monatlichen Unterhaltszahlung an",
+          "hint": "Erhälst Du Unterhalt von Deinem ehem. Ehe- oder Lebenspartner? Unterhaltsleistungen von Deinen Eltern an Dich sind hier nicht anzugeben. Weiter sind nur Beträge zur Deckung Deines Bedarfs anzugeben - nicht Unterhaltsbeträge zur Versorgung z.B. gemeinsamer Kinder"
+        },
+        "support": {
+          "text": "ein Stipendium, welches (zum Teil) aus öffentlichen Mitteln gefördert wird (z.B. Deutschlandstipendium), Meister-BAföG, Erziehungsbeihilfen, Hilfen aus EU Sozialfonds oder andere Ausbildungsbeihilfen aus öffentlichen Mitteln erhalten?"
+        },
+        "support_amount": {
+          "text": "Bruttosumme aller Ausbildungsbeihilfen und gleichartige Leistungen aus öffentlichen Mitteln, sowie Förderungsleistungen anderer Staaten",
+          "hint": ""
+        },
+        "other": {
+          "text": "Bruttosumme sonstiger Ausbildungsbeihilfen"
+        },
+        "rister": {
+          "text": "Zahlst du in die Rister Rente ein?"
+        },
+        "rister_amount": {
+          "text": "Summe",
+          "hint": "Cleverer Hinweis"
+        },
+        "pension": {
+          "text": "eine Rente z.B. Waisen- oder Unfallrente erhalten?"
+        },
+        "pension_amount": {
+          "text": "Waisenrente und/oder Waisengeld (einschl. Weihnachtszuwendung)",
+          "hint": "rechtlicher Kram"
+        },
+        "other_pension": {
+          "text": "Sonstige Renten (z.B. Unfallrente)"
+        },
+        "social": {
+          "text": "Sozialleistungen (z.B. Waisenrente oder AFBG) beantragen? "
+        },
+        "social_info": {
+          "text": "Von dir beantrage Sozialleistung",
+          "hint": "Hast Du eine Sozialleistung (z.B. Waisengeld, Meister-BAföG, o.ä.) beantrag und hast noch keinen Bewilligungsbescheid erhalten? Bitte gib hier die beantragte(n) Sozialleistung(en) an."
+        }
+      },
+      "debts": {
+        "debt": {
+          "text": "Schulden"
+        },
+        "mortgage": {
+          "text": "Bezahlst du eine Hypothek, Grundschulden oder sonstige Belastungen dieser Art ab?"
+        },
+        "mortgage_amount": {
+          "text": "Wie hoch ist die GESAMTE Summe aus Hypothek, Grundschulden oder sonstige Belastungen?"
+        },
+        "repeat": {
+          "text": "Hast Du Lasten, aus denen du z.B. zu regelmäßigen Zahlungen verpflichtet bist? Zum Beispiel: Autokredit oder Rentenzahlung"
+        },
+        "repeat_amount": {
+          "text": "Wie hoch ist die GESAMTE Summer von den regelmäßigen Zahlungen zu denen du verpflichtet bist."
+        },
+        "other": {
+          "text": "Hast du noch Schulden, die du nicht den anderen Angabemöglichekeiten zuordnen kannst z.B. Kleinkredite oder Studienkredite?"
+        },
+        "other_amount": {
+          "text": "Wie hoch ist die GESAMTE Summer der übrigen angaben?",
+          "hint": "z.B. Kleinkredite oder Studienkredite. Hier ist immer nur die Restschuld anzugeben. "
+        }
+      },
       "general": {
         "money_info": {
           "text": "Hierbei geht es um die Kontodaten auf den das BAföG gezahlt werden soll."
