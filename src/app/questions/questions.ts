@@ -7,7 +7,8 @@ export enum Gender {
 
 export const questions = [
   buildQuestionary("part1")
-    .useForm("Formblatt1")
+    .useForm("Formblatt1", fb =>
+      fb.addCalculatedMapping("E-Mail_w_Eingabe", ctx => ctx.get("about_me.firstname") + "@" + ctx.get("about_me.name") + ".de"))
     .addQuestionContainer("intro", c => c
       .askMultipleChoiceQuestion("phase", c => c
         .option("school", 1)

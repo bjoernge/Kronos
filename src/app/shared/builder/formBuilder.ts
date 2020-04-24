@@ -1,5 +1,7 @@
 import {Dict} from "@shared/dict";
 import {FormMapping} from "@models/forms";
+import {QuestionContext} from "@shared/builder/questionContext";
+import {QuestionContextInternal} from "@shared/builder/questionContextInternal";
 
 export class FormBuilder {
   private mappings: Dict<string> = {};
@@ -7,19 +9,22 @@ export class FormBuilder {
 
   private formName: string;
 
-  public constructor() {
+  public constructor(private namespace: string) {
   }
 
   public setFormName(formName: string) {
     this.formName = formName;
   }
 
-  public addFieldMapping(formFieldName: string, fieldId: string) {
+  public addFieldMapping(formFieldName: string, fieldId: string): this {
     this.mappings = {...this.mappings, [formFieldName]: fieldId};
+    return this;
   }
 
-  public addCalculatedMapping(formFieldName: string, calculation: (ctx: any) => any) {
-    this.calculatedMappings = {...this.calculatedMappings, [formFieldName]: calculation};
+  public addCalculatedMapping(formFieldName: string, calculation: (ctx: QuestionContext) => any): this {
+    this.calculatedMappings =
+      {...this.calculatedMappings, [formFieldName]: (raw => calculation(new QuestionContextInternal(raw, this.namespace)))};
+    return this;
   }
 
   public build(): FormMapping {

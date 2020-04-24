@@ -10,9 +10,11 @@ export function buildQuestionary(id: string, title: string = id): QuestionaryBui
 
 export class QuestionaryBuilder {
   private containers: QuestionContainer[] = [];
-  private formBuilder: FormBuilder = new FormBuilder();
+  private formBuilder: FormBuilder;
+  private namespace = "questions." + this.id;
 
   public constructor(private id: string, private title: string = id) {
+    this.formBuilder = new FormBuilder(this.namespace);
   }
 
   public withTitle(title: string) {
@@ -29,7 +31,7 @@ export class QuestionaryBuilder {
 
   public addQuestionContainer(namespace: string,
                               callback: (builder: QuestionContainerBuilder) => QuestionContainerBuilder): QuestionaryBuilder {
-    const builder = new QuestionContainerBuilder(namespace, "questions." + this.id + "." + namespace, this.formBuilder);
+    const builder = new QuestionContainerBuilder(namespace, this.namespace + "." + namespace, this.formBuilder);
     const container = callback(builder).build();
     this.containers.push(container);
     return this;
