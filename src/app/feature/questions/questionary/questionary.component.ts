@@ -1,9 +1,10 @@
 import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from "@angular/core";
-import {Questionary, QuestionContainer} from "../../../models/questions/questionContainer";
+import {QuestionContainer} from "../../../models/questions/questionContainer";
 import {FormControl, FormGroup} from "@angular/forms";
 import {SafeSubscriptionComponent} from "../../../shared/safe-subscription-component";
 import {prevCurNextAnimation} from "./questionary.animation";
 import {Dict} from "../../../shared/dict";
+import {Questionary} from "../../../models/questions/questionary";
 
 @Component({
   selector: "app-questionary",

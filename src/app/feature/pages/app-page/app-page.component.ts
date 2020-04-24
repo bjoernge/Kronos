@@ -3,12 +3,12 @@ import {combineLatest, Observable} from "rxjs";
 import {filter, first, map} from "rxjs/operators";
 import {ROUTE_PARAMETER_CURRENT_QUESTIONARY, ROUTE_PARAMETER_CURRENT_STEP} from "./routing-params";
 import {ActivatedRoute, Router} from "@angular/router";
-import {Questionary, QuestionContainer} from "../../../models/questions/questionContainer";
+import {Questionary, QuestionContainer} from "@models/questions";
 import {questions} from "../../../questions/questions";
-import {SafeSubscriptionComponent} from "../../../shared/safe-subscription-component";
+import {SafeSubscriptionComponent} from "@shared/safe-subscription-component";
 import {FormService} from "./form.service";
 import {HttpClient} from "@angular/common/http";
-import {Dict} from "../../../shared/dict";
+import {Dict} from "@shared/dict";
 
 
 @Component({
@@ -55,12 +55,9 @@ export class AppPageComponent extends SafeSubscriptionComponent implements OnIni
     this.router.navigate(["../", container.id], {relativeTo: this.activatedRoute});
   }
 
-  public save() {
+  public save(questionary: Questionary) {
     // this.http.get("/assets/forms/Formblatt_1.pdf", {responseType: "arraybuffer"})
-    this.formService.fillQuestionary("/assets/forms/Formblatt_1.pdf", {
-      "Name_Eingabe": "questions.part1.about_me.lastname",
-      "Vorname_Eingabe": "questions.part1.about_me.firstname"
-    }, this.data)
+    this.formService.fillQuestionary(questionary, this.data)
       .pipe(
         first(),
       ).subscribe(data => {

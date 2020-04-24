@@ -1,10 +1,5 @@
 import {Question} from "./question";
 
-export interface Questionary {
-  id: string;
-  title: string;
-  questionContainers: QuestionContainer[];
-}
 
 export interface QuestionContainer {
   id: string;
@@ -37,10 +32,4 @@ export interface QuestionContainerEntry<T extends Question = Question> {
    */
   isHidden?: (context: { [key: string]: any }) => boolean;
 }
-
-export interface Answer {
-  question: Question;
-  answer: string;
-}
-
 

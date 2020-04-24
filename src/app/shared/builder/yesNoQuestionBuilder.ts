@@ -1,5 +1,5 @@
-import {QuestionBuilder} from "./QuestionBuilder";
-import {YesNoQuestion} from "../models/questions/yesNoQuestion";
+import {QuestionBuilder} from "@shared/builder/questionBuilder";
+import {YesNoQuestion} from "@models/questions";
 
 export class YesNoQuestionBuilder extends QuestionBuilder<YesNoQuestion> {
   private yesText: string = "answers.yes";

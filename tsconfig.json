@@ -19,6 +19,14 @@
     "lib": [
       "es2019",
       "dom"
-    ]
+    ],
+    "paths": {
+      "@models/*": [
+        "src/app/models/*"
+      ],
+      "@shared/*": [
+        "src/app/shared/*"
+      ]
+    }
   }
 }

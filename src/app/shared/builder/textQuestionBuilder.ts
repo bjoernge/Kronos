@@ -1,5 +1,5 @@
-import {QuestionBuilder} from "./QuestionBuilder";
-import {TextQuestion} from "../models/questions/textQuestion";
+import {TextQuestion} from "@models/questions";
+import {QuestionBuilder} from "@shared/builder/questionBuilder";
 
 export class TextQuestionBuilder extends QuestionBuilder<TextQuestion> {
   public build(): TextQuestion {

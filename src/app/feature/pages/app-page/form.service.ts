@@ -2,6 +2,8 @@ import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {map} from "rxjs/operators";
+import {Questionary} from "@models/questions";
+import {PDF_FORMS} from "../../../questions/pdfForms";
 
 declare type FieldType =
   { type: "string" }
@@ -31,13 +33,14 @@ export class FormService {
   constructor(private http: HttpClient) {
   }
 
-  public fillQuestionary(url: string, formMapping: { [key: string]: string }, data: { [key: string]: any }): Observable<Uint8Array> {
+  public fillQuestionary(questionary: Questionary, data: { [key: string]: any }): Observable<Uint8Array> {
+    const url = PDF_FORMS[questionary.formMapping.formName];
+
     return this.http.get(url, {responseType: "arraybuffer"}).pipe(
       map(buffer => {
         const d = Object
           .keys(pdfform().list_fields(buffer))
-          .filter((k) => k in formMapping)
-          .reduce((prev, cur) => ({...prev, [cur]: [data[formMapping[cur]]]}), {});
+          .reduce((prev, cur) => ({...prev, [cur]: [questionary.formMapping.getFormField(cur, data)]}), {});
 
         return pdfform().transform(buffer, d);
       }),

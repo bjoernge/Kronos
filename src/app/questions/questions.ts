@@ -1,4 +1,4 @@
-import {buildQuestionary} from "../shared/QuestionaryBuilder";
+import {buildQuestionary} from "@shared/builder";
 
 export enum Gender {
   Male,
@@ -7,6 +7,7 @@ export enum Gender {
 
 export const questions = [
   buildQuestionary("part1")
+    .useForm("Formblatt1")
     .addQuestionContainer("intro", c => c
       .askMultipleChoiceQuestion("phase", c => c
         .option("school", 1)
@@ -45,8 +46,9 @@ export const questions = [
       .hideIf(() => true))
 
     .addQuestionContainer("about_me", c => c
-      .askText("firstname")
+      .askText("firstname", f => f.withFormName("Vorname_Eingabe"))
       .askText("name", f => f
+        .withFormName("Name_Eingabe")
         .hideIf(ctx => ctx.is("q1", "hide")))
       .askYesNoQuestion("q_birthname")
       .askText("birthname", f => f

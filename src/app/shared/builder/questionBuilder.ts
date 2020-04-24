@@ -1,9 +1,8 @@
-import {Question} from "../models/questions/question";
-import {QuestionContainerEntry} from "../models/questions/questionContainer";
-import {DocumentRequest} from "../models/questions/documentRequest";
 import {v4 as uuid} from "uuid";
-import {QuestionContext} from "./QuestionContext";
-import {QuestionContextInternal} from "./QuestionContextInternal";
+import {DocumentRequest, Question, QuestionContainerEntry} from "@models/questions";
+import {QuestionContextInternal} from "@shared/builder/questionContextInternal";
+import {QuestionContext} from "@shared/builder/questionContext";
+import {FormBuilder} from "@shared/builder/formBuilder";
 
 export abstract class QuestionBuilder<T extends Question> {
   protected text: string;
@@ -14,12 +13,16 @@ export abstract class QuestionBuilder<T extends Question> {
 
   protected questionContextCallback: (ctx: any) => QuestionContext;
 
-
-  public constructor(protected readonly id: string, protected readonly namespace: string) {
+  public constructor(protected readonly id: string, protected readonly namespace: string, private formBuilder: FormBuilder) {
     this.text = `${namespace}.${id}.text`;
     this.hintText = null;
     this.id = namespace ? `${namespace}.${id}` : id;
     this.questionContextCallback = ctx => new QuestionContextInternal(ctx, namespace);
+  }
+
+  public withFormName(formFieldName: string): this {
+    this.formBuilder.addFieldMapping(formFieldName, this.id);
+    return this;
   }
 
   public showHint(): this {

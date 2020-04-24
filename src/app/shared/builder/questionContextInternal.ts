@@ -1,4 +1,4 @@
-import {QuestionContext} from "./QuestionContext";
+import {QuestionContext} from "./questionContext";
 
 export class QuestionContextInternal implements QuestionContext {
   constructor(public raw: any, private defaultNamespace: string) {

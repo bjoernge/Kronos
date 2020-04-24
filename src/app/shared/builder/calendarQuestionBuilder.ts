@@ -1,5 +1,5 @@
-import {QuestionBuilder} from "./QuestionBuilder";
-import {CalendarQuestion} from "../models/questions/calendarQuestion";
+import {QuestionBuilder} from "./questionBuilder";
+import {CalendarQuestion} from "@models/questions/calendarQuestion";
 
 export class CalendarQuestionBuilder extends QuestionBuilder<CalendarQuestion> {
   private displayType: "textBox" | "embedded" | "popup";

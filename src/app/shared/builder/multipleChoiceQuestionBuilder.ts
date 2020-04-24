@@ -1,7 +1,7 @@
-import {QuestionBuilder} from "./QuestionBuilder";
-import {MultipleChoiceQuestion} from "../models/questions/multipleChoiceQuestion";
-import {Choice} from "../models/questions/choice";
-import {QuestionContext} from "./QuestionContext";
+import {Choice, MultipleChoiceQuestion} from "@models/questions";
+import {QuestionBuilder} from "@shared/builder/questionBuilder";
+import {QuestionContext} from "@shared/builder/questionContext";
+
 
 export class MultipleChoiceQuestionBuilder<T = any> extends QuestionBuilder<MultipleChoiceQuestion<T>> {
 
