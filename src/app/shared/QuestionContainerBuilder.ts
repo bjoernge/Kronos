@@ -11,17 +11,22 @@ import {Question} from "../models/questions/question";
 import {CalendarQuestionBuilder} from "./CalendarQuestionBuilder";
 import {CalendarQuestion} from "../models/questions/calendarQuestion";
 import {MultipleChoiceQuestion} from "../models/questions/multipleChoiceQuestion";
+import {QuestionContext} from "./QuestionContext";
+import {QuestionContextInternal} from "./QuestionContextInternal";
 
 type BuilderCallBack<T extends Question, B extends QuestionBuilder<T>> = (builder: B) => B;
 
 export class QuestionContainerBuilder {
+  protected questionContextCallback: (ctx: any) => QuestionContext;
+  protected hiddenCondition: QuestionContainer["isHidden"];
   private description: string;
   private title: string;
   private questionEntries: QuestionContainerEntry[] = [];
   private nextText: string = "app.next";
   private previousText: string = "app.previous";
 
-  public constructor(private namespace: string) {
+  public constructor(private id: string, private namespace: string = id) {
+    this.questionContextCallback = ctx => new QuestionContextInternal(ctx, namespace);
   }
 
   public withTitle(title: string) {
@@ -61,15 +66,27 @@ export class QuestionContainerBuilder {
     return this.ask(new CalendarQuestionBuilder(id, this.namespace), callback);
   }
 
+  public hideIf(callback: (context: QuestionContext) => boolean): this {
+    this.hiddenCondition = this.contextCallback(callback);
+
+    return this;
+  }
+
   public build(): QuestionContainer {
     return {
+      id: this.id,
       nextText: this.nextText,
       previousText: this.previousText,
       namespace: this.namespace,
       description: this.description,
       title: this.title,
-      questionEntries: this.questionEntries
+      questionEntries: this.questionEntries,
+      isHidden: this.hiddenCondition
     };
+  }
+
+  protected contextCallback(callback: (context: QuestionContext) => boolean): (ctx) => boolean {
+    return ctx => callback(this.questionContextCallback(ctx));
   }
 
   private ask<Q extends Question, B extends QuestionBuilder<Q>>(builder: B, callback?: BuilderCallBack<Q, B>): this {

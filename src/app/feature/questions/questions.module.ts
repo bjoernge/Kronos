@@ -19,6 +19,7 @@ import {TextBlockQuestionComponent} from "./text-block-question/text-block-quest
 import {CalendarQuestionComponent} from "./calendar-question/calendar-question.component";
 import {BaseQuestionComponent} from "./base-question/base-question.component";
 import {RouterModule} from "@angular/router";
+import { VisiblePipe } from './visible.pipe';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import {RouterModule} from "@angular/router";
     TextBlockQuestionComponent,
     CalendarQuestionComponent,
     BaseQuestionComponent,
+    VisiblePipe,
   ],
   exports: [
     MultipleChoiceQuestionComponent,

@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "Kronos": {
+    "kronos": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/Kronos",
+            "outputPath": "dist/kronos",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -30,7 +30,9 @@
             "styles": [
               "src/styles/main.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "lib/pdfform.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -65,18 +67,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "Kronos:build"
+            "browserTarget": "kronos:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "Kronos:build:production"
+              "browserTarget": "kronos:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "Kronos:build"
+            "browserTarget": "kronos:build"
           }
         },
         "test": {
@@ -114,11 +116,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "Kronos:serve"
+            "devServerTarget": "kronos:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "Kronos:serve:production"
+              "devServerTarget": "kronos:serve:production"
             }
           }
         }
@@ -183,5 +185,5 @@
       }
     }
   },
-  "defaultProject": "Kronos"
+  "defaultProject": "kronos"
 }

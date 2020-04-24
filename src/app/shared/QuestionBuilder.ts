@@ -3,33 +3,7 @@ import {QuestionContainerEntry} from "../models/questions/questionContainer";
 import {DocumentRequest} from "../models/questions/documentRequest";
 import {v4 as uuid} from "uuid";
 import {QuestionContext} from "./QuestionContext";
-
-class QuestionContextInternal implements QuestionContext {
-  constructor(public raw: any, private defaultNamespace: string) {
-
-  }
-
-  public get(id: string, namespace?: string) {
-    if (namespace) {
-      const namespaceParts = namespace.split(".");
-      const defaultNameSpaceParts = this.defaultNamespace.split(".");
-      namespace = defaultNameSpaceParts.slice(0, defaultNameSpaceParts.length - namespaceParts.length).concat(namespaceParts).join(".");
-    } else {
-      namespace = this.defaultNamespace;
-    }
-    return this.raw && this.raw[`${namespace}.${id}`];
-  }
-
-  public is(id: string, ...values: any[]): boolean {
-    return this.is_n(id, this.defaultNamespace, ...values);
-  }
-
-  public is_n(id: string, namespace: string, ...values: any[]): boolean {
-    const val = this.get(id, namespace);
-    return values.some(v => v === val);
-  }
-
-}
+import {QuestionContextInternal} from "./QuestionContextInternal";
 
 export abstract class QuestionBuilder<T extends Question> {
   protected text: string;
