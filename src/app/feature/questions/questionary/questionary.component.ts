@@ -116,8 +116,7 @@ export class QuestionaryComponent extends SafeSubscriptionComponent implements O
     }
 
     const direction = amount < 0 ? -1 : 1;
-    const current = this.questionary.questionContainers.indexOf(this.currentStep);
-    let next = current;
+    let next = this.questionary.questionContainers.indexOf(this.currentStep);
     while (amount !== 0) {
       next += direction;
 

@@ -44,7 +44,7 @@ export const questions = [
     )
 
     .addQuestionContainer("please_hide_me", c => c
-      .hideIf(() => true))
+      .hideIf(ctx => ctx.is("intro.phase", 3)))
 
     .addQuestionContainer("about_me", c => c
       .askText("firstname", f => f.withFormName("Vorname_Eingabe"))
