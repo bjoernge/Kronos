@@ -19,7 +19,10 @@ import {TextBlockQuestionComponent} from "./text-block-question/text-block-quest
 import {CalendarQuestionComponent} from "./calendar-question/calendar-question.component";
 import {BaseQuestionComponent} from "./base-question/base-question.component";
 import {RouterModule} from "@angular/router";
-import { VisiblePipe } from './visible.pipe';
+import {VisiblePipe} from "./visible.pipe";
+import {ListQuestionComponent} from "./list-question/list-question.component";
+import {QuestionFormControlFactory} from "./shared/questionFormControlFactory";
+import {DefaultQuestionFormControlFactory} from "./shared/defaultQuestionFormControlFactory";
 
 @NgModule({
   declarations: [
@@ -33,6 +36,7 @@ import { VisiblePipe } from './visible.pipe';
     CalendarQuestionComponent,
     BaseQuestionComponent,
     VisiblePipe,
+    ListQuestionComponent,
   ],
   exports: [
     MultipleChoiceQuestionComponent,
@@ -43,6 +47,7 @@ import { VisiblePipe } from './visible.pipe';
     QuestionaryComponent,
     TextBlockQuestionComponent,
     CalendarQuestionComponent,
+    ListQuestionComponent,
   ],
   imports: [
     SharedModule,
@@ -57,6 +62,12 @@ import { VisiblePipe } from './visible.pipe';
     MatSelectModule,
     MatTooltipModule,
     RouterModule
+  ],
+  providers: [
+    {
+      provide: QuestionFormControlFactory,
+      useClass: DefaultQuestionFormControlFactory
+    }
   ]
 })
 export class QuestionsModule {

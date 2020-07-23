@@ -1,6 +1,6 @@
 import {Component, Input} from "@angular/core";
 import {QuestionBaseComponent} from "../question-base-component";
-import {Question} from "../../../models/questions/question";
+import {Question} from "@models/questions";
 
 @Component({
   selector: "app-base-question",

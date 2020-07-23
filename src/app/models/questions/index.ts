@@ -9,3 +9,6 @@ export * from "./question";
 export * from "./textBlockQuestion";
 export * from "./textQuestion";
 export * from "./yesNoQuestion";
+export * from "./listQuestion";
+export * from "./questionEntry";
+export * from "./questions";

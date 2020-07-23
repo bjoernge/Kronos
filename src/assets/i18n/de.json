@@ -2,18 +2,44 @@
   "app": {
     "title": "Kronos",
     "next": "Weiter",
-    "previous": "Zurück"
+    "previous": "Zurück",
+    "errors": {
+      "maxlength": "Maximale Länge von {requiredLength}"
+    }
   },
   "answers": {
     "yes": "Ja",
     "no": "Nein"
   },
   "questions": {
+    "__default": {
+      "list": {
+        "add": "Weitere hinzufügen"
+      }
+    },
+    "blocks": {
+      "address": {
+        "address": {
+          "text": "Wie lautet die Anschrift?",
+          "placeholder": "Straße"
+        },
+        "zip": {
+          "placeholder": "Postleitzahl"
+        },
+        "city": {
+          "placeholder": "Stadt"
+        },
+        "country": {
+          "placeholder": "Land",
+          "hint": "Bitte gebe das Kürzel an. Bspw. bei den Niederlanden Nl"
+        }
+      }
+    },
     "part1": {
       "intro": {
         "phase": {
           "text": "Was bist du für den Zeitraum in dem du BAföG beantragst?",
-          "choices":{
+          "choices": {
             "school": "Schüler",
             "uni": "Student",
             "practical": "In einer Ausbildung / Praktikum"
@@ -47,7 +73,7 @@
         "parents": {
           "text": "Beantragst du Elternunabhängiges BAföG (bitte lese hierzu den Hinweis!) ?",
           "hint": "HINTS TEXT"
-        }, 
+        },
         "firsttime": {
           "text": "Hast du schon Mal BAföG beantragt?",
           "hint": "Bild vom Bescheid"
@@ -57,6 +83,97 @@
         },
         "number": {
           "text": "Wie lautet deine bisherige Amts- und Föderungsnummer?"
+        }
+      },
+      "uni": {
+        "info": {
+          "text": "Studium"
+        },
+        "university": {
+          "text": "Wie heißt deine Ausbildungstätte?"
+        },
+        "subject": {
+          "text": "Studienfach"
+        },
+        "graduation": {
+          "text": "Angestrebter Abschluss"
+        },
+        "semester": {
+          "text": "In welchem Semester wirst Du sein, wenn du BAföG beziehst?"
+        },
+        "time": {
+          "text": "Studierst du Voll- oder Teilzeit?",
+          "hint": "blub",
+          "choices": {
+            "full": "Vollzeit",
+            "part": "Teilzeit"
+          }
+        }
+      },
+      "children": {
+        "children": {
+          "elementCaption": "Kind {{index}}",
+          "addCaption": "Weiteres Kind hinzufügen",
+          "listEntries": {
+            "firstName": {
+              "text": "Vorname"
+            },
+            "lastName": {
+              "text": "Nachname"
+            }
+          }
+        }
+      },
+      "aboard": {
+        "info": {
+          "text": "Studium im Ausland"
+        },
+        "name": {
+          "text": "Wie heißt die Ausbildungsstätte im Ausland",
+          "placeholder": "Name der Ausbildungstätte"
+        },
+        "adress": {
+          "text": "Was ist die Anschrift der Ausbildungstätte?",
+          "placeholder": "Straße und Hausnummer"
+        },
+        "zip": {
+          "placeholder": "Postleitzahl"
+        },
+        "city": {
+          "placeholder": "Stadt"
+        },
+        "country": {
+          "placeholder": "Land"
+        },
+        "type": {
+          "text": "Was für eine Art Hochschule ist {{name}}",
+          "placeholder": "Art der Hochschule"
+        },
+        "start": {
+          "text": "Ab wann möchtest du gefördert werden?"
+        },
+        "end": {
+          "text": "Bis wann möchtest du gefördert werden?"
+        },
+        "start_lec": {
+          "text": "Ab wann finden deine Lehrveranstaltungen statt?"
+        },
+        "end_lec": {
+          "text": "Bis wann finden deine Lehrveranstaltungen statt?"
+        }
+      },
+      "aboard_study": {
+        "start": {
+          "text": "Ab wann möchtest du gefördert werden?"
+        },
+        "end": {
+          "text": "Bis wann möchtest du gefördert werden?"
+        },
+        "start_lec": {
+          "text": "Ab wann finden deine Lehrveranstaltungen statt?"
+        },
+        "end_lec": {
+          "text": "Bis wann finden deine Lehrveranstaltungen statt?"
         }
       },
       "about_me": {
@@ -104,7 +221,7 @@
         "german_nationality": {
           "text": "Hast du die Deutsche Staatsbürgerschaft?"
         },
-       "nationality": {
+        "nationality": {
           "text": "Welche Staatsbrügerschaft hast du?",
           "hint": "Bitte gebe das Kürzel an. Bspw. bei den Niederlanden Nl"
         },
@@ -118,20 +235,25 @@
           "text": "Hierbei geht es um deinen Hauptwohsitz (zum Beispiel bei deinen Eltern)"
         },
         "q_parents": {
-          "text": "Wohnst du bei deinen Eltern?"
+          "text": "Wirst du während der Ausbildung bei deinen Eltern wohnen?"
         },
-        "street":{
-          "text": "Wie lautet Strasse und Hausnummer?"
+        "reason_for_own_household": {
+          "text": "Warum nicht?"
+        },
+        "address": {
+          "text": "Wie lautet die Anschrift?",
+          "placeholder": "Straße"
         },
         "zip": {
-          "text": "Wie lautet die Postleitzahl?"
+          "placeholder": "Postleitzahl"
         },
         "city": {
-          "text": "In welcher Stadt?"
+          "placeholder": "Stadt"
         },
         "bell": {
           "text": "Bei?",
-          "hint": "Welcher Name steht auf dem Klingelschild drauf?"
+          "hint": "Welcher Name steht auf dem Klingelschild drauf?",
+          "placeholder": "Klingelschild"
         },
         "know_adress": {
           "text": "Kennst du deine Adresse, die du während deiner Ausbildung (Schule oder Studium) hast? "
@@ -139,11 +261,11 @@
         "sec_adress": {
           "text": "Hierbei geht es um deine Adresse an deinem Ausbildungsort (Schule, Studium)"
         },
-        "out_of_country": {
-          "text": "In welchem Land?",
+        "country": {
+          "placeholder": "Land",
           "hint": "Bitte gebe das Kürzel an. Bspw. bei den Niederlanden Nl"
         },
-        "sec_street":{
+        "sec_street": {
           "text": "Wie lautet Strasse und Hausnummer?"
         },
         "sec_zip": {
@@ -154,7 +276,8 @@
         },
         "sec_bell": {
           "text": "Bei?",
-          "hint": "Welcher Name steht auf dem Klingelschild drauf?"
+          "hint": "Welcher Name steht auf dem Klingelschild drauf?",
+          "placeholder": "Klingelschild"
         },
         "sec_out_of_country": {
           "text": "In welchem Land?",
@@ -201,7 +324,7 @@
         "kfz_amount": {
           "text": "Gebe bitte hier den Zeitwert der Fahrzeuge an.",
           "hint": "Etwas sinnvolles zum Zeitwert"
-        }, 
+        },
         "stocks": {
           "text": "Besitzt Du Betriebsanteile, Wertpapiere oder Lebensversicherungen?"
         },
@@ -212,6 +335,10 @@
         "stock": {
           "text": "Die Höhe deiner Wertpapiere (z. B. Aktien, Pfandbriefe, Schatzanweisungen, Wechsel, Schecks; Kurswert)",
           "hint": "Hier ist der Kurswert im Zeitpunkt der Antragstellung maßgeblich."
+        },
+        "life": {
+          "text": "Lebensversicherungen (Rückkaufswert)",
+          "hint": "Lorem"
         },
         "land": {
           "text": "Besitzt Du Grundstücke oder Miteigentumsanteile?"
@@ -242,6 +369,9 @@
       "income": {
         "you_will": {
           "text": "Wirst du für den Zeitraum in dem du BAföG beantragst..."
+        },
+        "income": {
+          "text": "Einkommen erzielen"
         },
         "intership": {
           "text": "Ausbildungs- und Praktikumsvergütung oder Sachbezüge erhalten?"
@@ -365,6 +495,125 @@
         "other_amount": {
           "text": "Wie hoch ist die GESAMTE Summer der übrigen angaben?",
           "hint": "z.B. Kleinkredite oder Studienkredite. Hier ist immer nur die Restschuld anzugeben. "
+        }
+      },
+      "mother": {
+        "forname": {
+          "text": "Wie lauter der Vorname deiner Mutter?"
+        },
+        "name": {
+          "text": "Wie lauter der Nachname deiner Mutter?"
+        },
+        "birthname_q": {
+          "text": "Hat deine Mutter einen anderen Geburtsnamen?"
+        },
+        "birthname": {
+          "text": "Wie lautet der Geburtsname deiner Mutter?"
+        },
+        "birthdate": {
+          "text": "Wann ist deine Mutter geboren?"
+        },
+        "alive": {
+          "text": "Ist deine Mutter verstorben?"
+        },
+        "death_date": {
+          "text": "Wann ist sie verstorben?"
+        }
+      },
+      "mother_other": {
+        "street": {
+          "text": "In welcher Straße wohnt deine Mutter? (mit Hausnummer)"
+        },
+        "city": {
+          "text": "In welcher Stadt wohnt sie?"
+        },
+        "zip": {
+          "text": "Wie lautet die Postleitzahl?"
+        },
+        "telefon_q": {
+          "text": "Möchtest du die Telefonnummer deiner Mutter angeben?"
+        },
+        "telefon": {
+          "text": "Wie lautet die Telefonnummer?"
+        },
+        "mail_q": {
+          "text": "Möchtest du die E-Mail-Adresse deiner Mutter angeben?"
+        },
+        "mail": {
+          "text": "Wie lautet die E-Mail Adresse?"
+        },
+        "german_nationality": {
+          "text": "Hat deine Mutter die Deutsche Staatsbürgerschaft?"
+        },
+        "nationality": {
+          "text": "Welche Staatsbrügerschaft hat sie?",
+          "hint": "Bitte gebe das Kürzel an. Bspw. bei den Niederlanden Nl"
+        },
+        "foreveralone": {
+          "text": "Welchen Familienstand hat deine Mutter?",
+          "choices": {
+            "alone": "ledig",
+            "married": "verheiratet oder in eingetragener Lebenspartnerschaft",
+            "seperated": "dauernd getrennt lebend",
+            "weathered": "verwittwert",
+            "divorced": "geschieden"
+          }
+        },
+        "since": {
+          "text": "Seit wann?"
+        },
+        "income": {
+          "text": "Hatte deine Mutter vor 2 Jahren einnahmen?"
+        }
+      },
+      "mother_income": {
+        "employment_relationship": {
+          "text": "Als was ist deine Mutter momentan tätig?",
+          "choices": {
+            "worker": "Arbeiterin/Arbeiter",
+            "employee": "Angestellte/ Angestellter",
+            "official": "Beamtin/ Beamter",
+            "entrepreneur": "Selbständige/ Selbständiger",
+            "notlonger": "Nicht mehr erwerbstätig"
+          }
+        },
+        "since": {
+          "text": "Seit wann?"
+        },
+        "employment_relationship_past": {
+          "text": "Als was war deine Mutter vor zwei Jahren tätig?",
+          "choices": {
+            "worker": "erwerbstätig als rentenversicherungspflichtige/r Arbeitnehmer/in (z.B. Arbeiter/in, Angestellte/r) oder in Ausbildung",
+            "employee": "erwerbstätig als nichtrentenversicherungspflichtige/r Arbeitnehmer/in oder als Person im Ruhestandsalter, die einen Anspruch auf Alterssicherung aus einer renten- oder nichtrentenversicherungspflichtigen Beschäftigung oder Tätigkeit hat (z. B. Beamte, Richter, Berufssoldaten, Altersrentner/in)",
+            "official": "erwerbstätig als Nichtarbeitnehmer/in (z.B. Selbständige/r) oder auf Antrag von der Versicherungspflicht befreite/r oder wegen geringfügiger Beschäftigung versicherungsfreie/r Arbeitnehmer/in",
+            "entrepreneur": "Personen im Ruhestandsalter, soweit sie nicht erwerbstätig sind, und sonstige Nichterwerbstätige"
+          }
+        },
+        "tax_info": {
+          "text": "Steuererklärung für vor 2 Jahren"
+        },
+        "tax_1": {
+          "text": "Hat deine Mutter für das Jahr vor 2 Jahren eine Steuererklärung abgegeben?"
+        },
+        "tax_2": {
+          "text": "Wird deine Mutter noch eine Steuererklärung für das Jahr vor 2 Jahren abgeben?"
+        },
+        "tax_3": {
+          "text": "Hat deine Mutter die Steuerklärung einzelveranlagt, also alleine abgegeben?",
+          "hint": "Bei der Abgabe der Lohnsteuererklärug kann man beantragen, dass die Veranlagung - also sozusagen die Berechnung der Steuer - zusammen mit einer anderen Person erfolgen soll."
+        },
+        "tax_3_ext": {
+          "text": "Die Veranlagung erfolgt/e zusammen mit",
+          "choices": {
+            "father": "deinem Vater",
+            "other": "der oder dem neuen Ehegatten/in des Elternteils"
+          }
+        },
+        "office": {
+          "text": "Bei welchem Finanzamt?"
+        },
+        "number": {
+          "text": "Wie lautet die Steuernummer?"
         }
       },
       "general": {

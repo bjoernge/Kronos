@@ -3,6 +3,17 @@ import {Questionary, QuestionContainer} from "@models/questions";
 import {FormBuilder} from "@shared/builder/formBuilder";
 import {PDF_FORMS} from "../../questions/pdfForms";
 
+export interface Block<T, S> {
+  blockId: string;
+  callback: (builder: T, args: S) => T;
+}
+
+export function defineBlock<T = QuestionContainerBuilder, S = never>(id: string, callback: (builder: T, args: S) => T): Block<T, S> {
+  return {
+    blockId: `questions.blocks.${id}`,
+    callback: callback
+  };
+}
 
 export function buildQuestionary(id: string, title: string = id): QuestionaryBuilder {
   return new QuestionaryBuilder(title);
@@ -42,7 +53,7 @@ export class QuestionaryBuilder {
       id: this.id,
       title: this.title,
       questionContainers: this.containers,
-      formMapping: this.formBuilder.build()
+      formMapping: this.formBuilder.used ? this.formBuilder.build() : undefined
     };
   }
 }

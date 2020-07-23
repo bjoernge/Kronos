@@ -4,10 +4,11 @@ import {DocumentRequest} from "./documentRequest";
 
 export class CalendarQuestion implements Question {
 
-  public readonly type: string = "calendar";
+  public readonly type: "calendar" = "calendar";
   public hint: string;
   public id: string;
   public text: string;
+  public placeholder: string;
   public documentRequests: DocumentRequest[] = [];
 
   constructor(config: QuestionOptions & {
@@ -24,5 +25,6 @@ export class CalendarQuestion implements Question {
     this.id = config.id;
     this.text = config.text;
     this.documentRequests = config.documents;
+    this.placeholder = config.placeholder;
   }
 }

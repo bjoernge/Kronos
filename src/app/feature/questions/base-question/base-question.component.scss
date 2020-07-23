@@ -17,4 +17,14 @@
     margin-left: 16px;
     margin-top: 16px;
   }
+
+  &.inline {
+    .question {
+      grid-column: 1/2;
+    }
+
+    .hint {
+      grid-row: 1;
+    }
+  }
 }

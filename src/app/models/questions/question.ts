@@ -5,6 +5,7 @@ export interface Question {
   text: string;
   readonly type: string;
   hint: string;
-  documentRequests: DocumentRequest[]
+  documentRequests: DocumentRequest[];
+  placeholder: string;
 }
 

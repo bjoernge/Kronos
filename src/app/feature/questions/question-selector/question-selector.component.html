@@ -10,6 +10,8 @@
                        [question]="question"></app-yes-no-question>
   <app-text-block-question *ngSwitchCase="'textBlock'" [context]="context" [control]="control"
                            [question]="question"></app-text-block-question>
+  <app-list-question *ngSwitchCase="'list'" [context]="context" [control]="control"
+                     [question]="question"></app-list-question>
   <div *ngSwitchDefault>
     The question type "{{question.type}}" is unknown.
   </div>

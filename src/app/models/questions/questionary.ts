@@ -5,5 +5,5 @@ export interface Questionary {
   id: string;
   title: string;
   questionContainers: QuestionContainer[];
-  formMapping: FormMapping;
+  formMapping?: FormMapping;
 }

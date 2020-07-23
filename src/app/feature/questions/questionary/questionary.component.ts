@@ -1,10 +1,10 @@
 import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from "@angular/core";
-import {QuestionContainer} from "../../../models/questions/questionContainer";
-import {FormControl, FormGroup} from "@angular/forms";
-import {SafeSubscriptionComponent} from "../../../shared/safe-subscription-component";
+import {Questionary, QuestionContainer} from "@models/questions";
+import {FormGroup} from "@angular/forms";
+import {SafeSubscriptionComponent} from "@shared/safe-subscription-component";
 import {prevCurNextAnimation} from "./questionary.animation";
-import {Dict} from "../../../shared/dict";
-import {Questionary} from "../../../models/questions/questionary";
+import {Dict} from "@shared/dict";
+import {QuestionFormControlFactory} from "../shared/questionFormControlFactory";
 
 @Component({
   selector: "app-questionary",
@@ -27,7 +27,7 @@ export class QuestionaryComponent extends SafeSubscriptionComponent implements O
   @ViewChild("containerRef")
   public containerRef: ElementRef;
 
-  constructor() {
+  constructor(private controlFactory: QuestionFormControlFactory) {
     super();
   }
 
@@ -37,13 +37,9 @@ export class QuestionaryComponent extends SafeSubscriptionComponent implements O
   public set data(value: Dict) {
     this._data = value;
     if (this.formGroup && this._data !== value) {
-      const newVal = this.questionary.questionContainers.reduce((prev, cur) => ({
-        ...prev,
-        [cur.namespace]: Object.entries(value)
-          .filter(([key]) => key.startsWith(cur.namespace))
-          .reduce((p, [key, val]) => ({...p, [key]: val}), {})
-      }), {});
-      this.formGroup.patchValue(newVal);
+      for (let container of this.questionary.questionContainers) {
+        this.formGroup.controls[container.namespace] = this.controlFactory.createQuestionEntryFormGroup(container.questionEntries, value);
+      }
     }
   }
 
@@ -61,34 +57,7 @@ export class QuestionaryComponent extends SafeSubscriptionComponent implements O
   }
 
   ngOnInit() {
-    this.formGroup =
-      new FormGroup(this.questionary.questionContainers.reduce((prev, cur) =>
-        ({
-          ...prev,
-          [cur.namespace]: new FormGroup(cur.questionEntries.reduce((p, c) => ({
-            ...p,
-            [c.question.id]: new FormControl(c.defaultValue && c.defaultValue(null) || this._data && this._data[c.question.id])
-          }), {}))
-        }), {}));
-
-    this.subscribe(this.formGroup.valueChanges, context => {
-      for (const container of this.questionary.questionContainers) {
-        const group = this.formGroup.controls[container.namespace] as FormGroup;
-        for (const question of container.questionEntries) {
-          const control = group.controls[question.question.id];
-
-          // reevaluate the default value
-          if (question.defaultValue && control.pristine) {
-            const defaultValue = question.defaultValue(context);
-            if (defaultValue !== control.value) {
-              control.setValue(defaultValue);
-            }
-          }
-        }
-      }
-
-      this.dataChanged.emit(Object.values(context).reduce((prev: object, cur: object) => ({...prev, ...cur}), {}));
-    });
+    this.formGroup = this.controlFactory.createQuestionaryFormGroup(this.questionary, this._data);
   }
 
   public animationStarting() {
@@ -131,4 +100,6 @@ export class QuestionaryComponent extends SafeSubscriptionComponent implements O
 
     return this.questionary.questionContainers[next];
   }
+
+
 }

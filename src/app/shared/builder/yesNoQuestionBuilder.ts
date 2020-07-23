@@ -17,12 +17,13 @@ export class YesNoQuestionBuilder extends QuestionBuilder<YesNoQuestion> {
 
   public build(): YesNoQuestion {
     return new YesNoQuestion({
-      id: this.id,
+      id: this.fqn,
       text: this.text,
       hint: this.hintText,
       documents: this.documents,
       yesText: this.yesText,
       noText: this.noText,
+      placeholder: this.placeholder
     });
   }
 }

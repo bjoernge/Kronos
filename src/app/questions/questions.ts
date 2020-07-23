@@ -1,9 +1,50 @@
-import {buildQuestionary} from "@shared/builder";
+import {buildQuestionary, defineBlock} from "@shared/builder";
+import {QuestionEntry} from "@models/questions";
 
 export enum Gender {
   Male,
   Female,
 }
+
+export enum Phase {
+  School = 1,
+  Uni = 2,
+  Practical = 3
+}
+
+export interface BlockArgs<T extends string> {
+  form: { [k in T]: string };
+  hints?: { [k in T]?: boolean };
+  defaults?: { [k in T]?: QuestionEntry["defaultValue"] };
+}
+
+export const askForAddress = defineBlock("address",
+  (builder,
+   args: BlockArgs<"address" | "zip" | "city" | "country">) => {
+
+    args = {hints: {country: true, ...args.hints}, defaults: {country: () => "DE", ...args.defaults}, ...args};
+
+    for (const name of ["address", "zip", "city", "country"]) {
+      builder.askText(name, f => {
+        if (name !== "address") {
+          f.hideText();
+        }
+
+        f.withFormName(args.form[name]);
+        if (args.hints[name]) {
+          f.showHint();
+        }
+
+        if (args.defaults[name]) {
+          f.defaultTo(args.defaults[name]);
+        }
+        return f;
+      });
+    }
+
+    return builder;
+  }
+);
 
 export const questions = [
   buildQuestionary("part1")
@@ -11,9 +52,9 @@ export const questions = [
       fb.addCalculatedMapping("E-Mail_w_Eingabe", ctx => ctx.get("about_me.firstname") + "@" + ctx.get("about_me.name") + ".de"))
     .addQuestionContainer("intro", c => c
       .askMultipleChoiceQuestion("phase", c => c
-        .option("school", 1)
-        .option("uni", 2)
-        .option("practical", 3))
+        .option("school", Phase.School)
+        .option("uni", Phase.Uni)
+        .option("practical", Phase.Practical))
       .askForDate("start_date", c => c
         .showAsPopup()
         .showHint())
@@ -38,13 +79,45 @@ export const questions = [
       .askYesNoQuestion("firsttime", c => c
         .showHint())
       .askText("institute", c => c
-        .hideIf(ctx => ctx.is("firsttime", null, false)))
+        .hideIf(ctx => ctx.is("firsttime", null, false))
+        .withFormName("Amt_Ausbildungsförderung_Eingabe"))
       .askText("number", c => c
-        .hideIf(ctx => ctx.is("firsttime", null, false)))
+        .hideIf(ctx => ctx.is("firsttime", null, false))
+        .withFormName("bisherige_Förderungsnummer_Eingabe"))
     )
 
     .addQuestionContainer("please_hide_me", c => c
       .hideIf(ctx => ctx.is("intro.phase", 3)))
+
+    .addQuestionContainer("uni", c => c
+      .hideIf(ctx => ctx.is("intro.phase", 1, 3))
+      .printInfo("info")
+      .askText("university", f => f.withFormName("Ausbildungsstätte_Eingabe"))
+      .askText("subject", f => f.withFormName("Klasse_Fachrichtung_Eingabe"))
+      .askText("graduation", f => f.withFormName("angestrebter_Anschluss_Eingabe"))
+      .askText("semester")
+      .askMultipleChoiceQuestion("time", f => f
+        .option("full", 1)
+        .option("part", 2)
+        .withFormName("Vollzeit_Teilzeit_Auswahl")
+        .showHint()))
+
+    .addQuestionContainer("aboard", c => c
+      .hideIf(ctx => ctx.is("intro.aboard", false))
+      .printInfo("info")
+      .askText("name")
+      .askText("adress")
+      .askText("zip", f => f.hideText())
+      .askText("city", f => f.hideText())
+      .askText("country", f => f.hideText())
+      .askText("type")
+    )
+
+    .addQuestionContainer("aboard_study", c => c
+      .askForDate("start", f => f.showAsPopup())
+      .askForDate("end", f => f.showAsPopup())
+      .askForDate("start_lec", f => f.showAsPopup())
+      .askForDate("end_lec", f => f.showAsPopup()))
 
     .addQuestionContainer("about_me", c => c
       .askText("firstname", f => f.withFormName("Vorname_Eingabe"))
@@ -53,10 +126,13 @@ export const questions = [
         .hideIf(ctx => ctx.is("q1", "hide")))
       .askYesNoQuestion("q_birthname")
       .askText("birthname", f => f
-        .hideIf(ctx => ctx.is("q_birthname", false, null)))
+        .hideIf(ctx => ctx.is("q_birthname", false, null))
+        .withFormName("Geburtsname_Eingabe"))
       .askMultipleChoiceQuestion("sex", c => c.option("male", "Gender.Male").option("female", "1"))
       .askForDate("birthdate", f => f.showAsPopup())
-      .askText("birthplace", f => f.showHint())
+      .askText("birthplace", f => f
+        .showHint()
+        .withFormName("Geburtsort_Eingabe"))
       .askMultipleChoiceQuestion("foreveralone", c => c
         .option("alone", 1)
         .option("married", 2)
@@ -76,32 +152,30 @@ export const questions = [
 
     .addQuestionContainer("mine_adress", c => c
       .printInfo("main_adress")
-      .askText("street")
-      .askText("zip")
-      .askText("city")
-      .askText("out_of_country", f => f
-        .showHint()
-        .defaultTo("DE"))
+      .block("main_address", askForAddress, {
+        form: {
+          address: "Straße_Hausnummer_Eingabe",
+          zip: "PLZ_Eingabe",
+          country: "Kennbuchstaben_Eingabe",
+          city: "Ort_Eingabe",
+        }
+      })
       .askText("bell", f => f
         .showHint())
       .askYesNoQuestion("q_parents")
+      .askText("reason_for_own_household", f => f
+        .hideIf(ctx => !(ctx.is("q_parents", false) && ctx.is_n("phase", "intro", Phase.School))))
       .askYesNoQuestion("know_adress", f => f
         .hideIf(ctx => ctx.is("q_parents", true, null)))
       .printInfo("sec_adress", f => f
         .hideIf(ctx => ctx.is("know_adress", false, null) || ctx.is("q_parents", true, null)))
-      .askText("sec_street", f => f
-        .hideIf(ctx => ctx.is("know_adress", false, null) || ctx.is("q_parents", true, null)))
-      .askText("sec_zip", f => f
-        .hideIf(ctx => ctx.is("know_adress", false, null) || ctx.is("q_parents", true, null)))
-      .askText("sec_city", f => f
-        .hideIf(ctx => ctx.is("know_adress", false, null) || ctx.is("q_parents", true, null)))
-      .askText("sec_out_of_country", f => f
-        .hideIf(ctx => ctx.is("know_adress", false, null) || ctx.is("q_parents", true, null))
-        .showHint()
-        .defaultTo("DE"))
+
+      .block("sec_address", askForAddress, {form: {address: "", city: "", country: "", zip: ""}})
+
       .askText("sec_bell", f => f
         .hideIf(ctx => ctx.is("know_adress", false, null) || ctx.is("q_parents", true, null))
-        .showHint())
+        .showHint()
+        .withFormName("bei_w_Eingabe"))
       .askYesNoQuestion("prop_of_parents", f => f
         .hideIf(ctx => ctx.is("know_adress", false, null) || ctx.is("q_parents", true, null)))
     )
@@ -110,73 +184,103 @@ export const questions = [
       .printInfo("capital")
       .askYesNoQuestion("bar")
       .askText("bar_amount", c => c
-        .hideIf(ctx => ctx.is("bar", false, null)))
+        .hideIf(ctx => ctx.is("bar", false, null))
+        .withFormName("Barvermögen_Eingabe"))
       .askYesNoQuestion("bank")
       .askText("bank_amount", c => c
-        .hideIf(ctx => ctx.is("bank", false, null)))
+        .hideIf(ctx => ctx.is("bank", false, null))
+        .withFormName("Bankguthaben_Eingabe"))
       .askYesNoQuestion("building_savings")
       .askText("building_savings_amount", c => c
-        .hideIf(ctx => ctx.is("building_savings", false, null)))
+        .hideIf(ctx => ctx.is("building_savings", false, null))
+        .withFormName("Bausparguthaben_Eingabe"))
       .askYesNoQuestion("retirement")
       .askText("retirement_amount", c => c
-        .hideIf(ctx => ctx.is("retirement", false, null)))
+        .hideIf(ctx => ctx.is("retirement", false, null))
+        .withFormName("Altersvorsorge_Eingabe"))
       .askYesNoQuestion("kfz")
       .askText("kfz_amount", c => c
         .hideIf(ctx => ctx.is("kfz", false, null))
+        .withFormName("KFZ_Eingabe")
         .showHint())
       .askYesNoQuestion("stocks")
       .askText("buisness_assets", c => c
+        .withFormName("Vermögen_sonstig_Eingabe")
         .hideIf(ctx => ctx.is("stocks", false, null))
         .showHint())
       .askText("stock", c => c
+        .withFormName("Wertpapiere_Eingabe")
+        .hideIf(ctx => ctx.is("stocks", false, null))
+        .showHint())
+      .askText("life", c => c
+        .withFormName("LV_Eingabe")
         .hideIf(ctx => ctx.is("stocks", false, null))
         .showHint())
       .askYesNoQuestion("land")
       .askText("forest", c => c
         .hideIf(ctx => ctx.is("land", false, null))
+        .withFormName("Land_Eingabe")
         .showHint())
       .askText("vacant", c => c
         .hideIf(ctx => ctx.is("land", false, null))
+        .withFormName("Grundstücke_Eingabe")
         .showHint())
       .askText("built", c => c
         .hideIf(ctx => ctx.is("land", false, null))
+        .withFormName("Grundstücke_bebaut_Eingabe")
         .showHint())
       .askYesNoQuestion("other")
       .askText("pension", c => c
         .hideIf(ctx => ctx.is("other", false, null))
+        .withFormName("Betriebsvermögen_Eingabe")
         .showHint())
       .askText("other_amount", c => c
-        .hideIf(ctx => ctx.is("other", false, null)))
+        .hideIf(ctx => ctx.is("other", false, null))
+        .withFormName("Forderungen_Eingabe"))
     )
     .addQuestionContainer("income", c => c
       .printInfo("you_will")
-      .askYesNoQuestion("intership")
+      .askYesNoQuestion("income")
+      .askYesNoQuestion("intership", f => f
+        .hideIf(ctx => ctx.is("income", false, null)))
       .askText("intership_amount", f => f
+        .withFormName("Ausbildungsvergütung_Eingabe")
         .hideIf(ctx => ctx.is("intership", false, null))
         .showHint())
-      .askYesNoQuestion("holiday")
+      .askYesNoQuestion("holiday", f => f
+        .hideIf(ctx => ctx.is("income", false, null)))
       .askText("holiday_amount", f => f
+        .withFormName("Arbeitsverhältnis_Eingabe")
         .hideIf(ctx => ctx.is("holiday", false, null))
         .showHint())
       .askYesNoQuestion("service", f => f
+        .hideIf(ctx => ctx.is("holiday", false, null))
         .hideIf(ctx => ctx.is("holiday", false, null) && ctx.is("intership", false, null))
         .showHint())
-      .askYesNoQuestion("independence")
+      .askYesNoQuestion("independence", f => f
+        .hideIf(ctx => ctx.is("income", false, null)))
       .askText("independence_amount", f => f
+        .withFormName("Einkünfte_selbst_Eingabe")
         .hideIf(ctx => ctx.is("independence", false, null)))
-      .askYesNoQuestion("capital")
+      .askYesNoQuestion("capital", f => f
+        .hideIf(ctx => ctx.is("income", false, null)))
       .askText("capital_amount", f => f
+        .withFormName("Kapitalvermögen_Eingabe")
         .hideIf(ctx => ctx.is("capital", false, null))
         .showHint())
-      .askYesNoQuestion("sholarship")
+      .askYesNoQuestion("sholarship", f => f
+        .hideIf(ctx => ctx.is("income", false, null)))
       .askText("sholarship_amount", f => f
+        .withFormName("Zuwendungen_Eingabe")
         .hideIf(ctx => ctx.is("sholarship", false, null)))
-      .askYesNoQuestion("bafog_regulation")
+      .askYesNoQuestion("bafog_regulation", f => f
+        .hideIf(ctx => ctx.is("income", false, null)))
       .askText("bafog_regulation_amount", f => f
+        .withFormName("Einkommensverordnung_Eingabe")
         .hideIf(ctx => ctx.is("bafog_regulation", false, null))
         .showHint())
       .askYesNoQuestion("children_entertains", f => f
-        .hideIf(ctx => ctx.is_n("about_me", "children", false)))
+        .hideIf(ctx => ctx.is("about_me.children", false, null)))
       .askText("children_entertains_amount", f => f
         .hideIf(ctx => ctx.is("children_entertains", false, null))
         .showHint())
@@ -201,6 +305,7 @@ export const questions = [
         .showHint())
       .askYesNoQuestion("pension")
       .askText("pension_amount", f => f
+        .withFormName("Waisen_Eingabe")
         .hideIf(ctx => ctx.is("pension", false, null))
         .showHint())
       .askText("other_pension", f => f
@@ -215,14 +320,100 @@ export const questions = [
       .printInfo("debt")
       .askYesNoQuestion("mortgage")
       .askText("mortgage_amount", f => f
+        .withFormName("Hypotheken_Eingabe")
         .hideIf(ctx => ctx.is("mortgage", false, null)))
       .askYesNoQuestion("repeat")
       .askText("repeat_amount", f => f
+        .withFormName("Lasten_Eingabe")
         .hideIf(ctx => ctx.is("repeat", false, null)))
       .askYesNoQuestion("other")
       .askText("other_amount", f => f
+        .withFormName("Schulden_Eingabe")
         .hideIf(ctx => ctx.is("other", false, null))
         .showHint()))
+
+    .addQuestionContainer("mother", c => c
+      .askText("forname")
+      .askText("name")
+      .askYesNoQuestion("birthname_q")
+      .askText("birthname", f => f
+        .hideIf(ctx => ctx.is("birthname_q", false)))
+      .askForDate("birthdate", f => f.showAsPopup())
+      .askYesNoQuestion("alive")
+      .askForDate("death_date", f => f
+        .showAsPopup()
+        .hideIf(ctx => ctx.is("alive", false))))
+
+    .addQuestionContainer("mother_other", c => c
+      .hideIf(ctx => ctx.is("mother.alive", true))
+      .askText("street")
+      .askText("city")
+      .askText("zip")
+      .askYesNoQuestion("telefon_q")
+      .askText("telefon", f => f
+        .hideIf(ctx => ctx.is("telefon_q", false, null)))
+      .askYesNoQuestion("mail_q")
+      .askText("mail", f => f
+        .hideIf(ctx => ctx.is("mail_q", false, null)))
+      .askYesNoQuestion("german_nationality")
+      .askText("nationality", f => f
+        .hideIf(ctx => ctx.is("german_nationality", true, null))
+        .showHint())
+      .askMultipleChoiceQuestion("foreveralone", f => f
+        .option("alone", 1)
+        .option("married", 2)
+        .option("seperated", 3)
+        .option("weathered", 4)
+        .option("divorced", 5))
+      .askForDate("since", f => f
+        .hideIf(ctx => ctx.is("foreveralone", 1)))
+      .askYesNoQuestion("income"))
+
+    .addQuestionContainer("mother_income", c => c
+      .hideIf(ctx => ctx.is("mother_other.income", false, null))
+      .askMultipleChoiceQuestion("employment_relationship", f => f
+        .option("worker", 1)
+        .option("employee", 2)
+        .option("official", 3)
+        .option("entrepreneur", 4)
+        .option("notlonger", 5))
+      .askForDate("since", f => f
+        .showAsPopup()
+        .hideIf(ctx => !ctx.is("employment_relationship", 6)))
+      .askMultipleChoiceQuestion("employment_relationship_past", f => f
+        .option("worker", 1)
+        .option("employee", 2)
+        .option("official", 3)
+        .option("entrepreneur", 4))
+      .printInfo("tax_info")
+      .askYesNoQuestion("tax_1")
+      .askYesNoQuestion("tax_2")
+      .askYesNoQuestion("tax_3", f => f
+        .showHint())
+      .askMultipleChoiceQuestion("tax_3_ext", f => f
+        .hideIf(ctx => ctx.is("tax_3", true))
+        .option("father", 1)
+        .option("other", 2))
+      .askText("office", f => f
+        .hideIf(ctx => ctx.is("tax_3", true)))
+      .askText("number", f => f
+        .hideIf(ctx => ctx.is("tax_3", true))))
+
+    .addQuestionContainer("father", c => c)
+
+    .addQuestionContainer("children", c => c
+      .hideIf(ctx => ctx.is("about_me.children", false, null))
+      .askForList("children", l => l
+        .showElementCaption()
+        .entries(b => b
+          .askText("firstName")
+          .askText("lastName")
+          .askForDate("birthDate")
+        ))
+    )
+
+    .addQuestionContainer("partner", c => c
+      .hideIf(ctx => !ctx.is("about_me.foreveralone", 2)))
 
     .addQuestionContainer("general", c => c
       .printInfo("money_info")

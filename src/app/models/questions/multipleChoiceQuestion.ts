@@ -4,12 +4,13 @@ import {QuestionOptions} from "./questionOptions";
 import {DocumentRequest} from "./documentRequest";
 
 export class MultipleChoiceQuestion<T = string> implements Question {
-  public type = "multipleChoice";
+  public type: "multipleChoice" = "multipleChoice";
   public hint: string;
   public id: string;
   public text: string;
   public choices: Choice<T>[];
   public documentRequests: DocumentRequest[];
+  public placeholder: string;
 
   public constructor(config: QuestionOptions & {
     choices: Choice<T>[]
@@ -24,5 +25,6 @@ export class MultipleChoiceQuestion<T = string> implements Question {
     this.text = config.text;
     this.choices = config.choices;
     this.documentRequests = config.documents;
+    this.placeholder = config.placeholder;
   }
 }

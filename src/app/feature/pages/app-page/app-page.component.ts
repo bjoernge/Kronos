@@ -7,8 +7,8 @@ import {Questionary, QuestionContainer} from "@models/questions";
 import {questions} from "../../../questions/questions";
 import {SafeSubscriptionComponent} from "@shared/safe-subscription-component";
 import {FormService} from "./form.service";
-import {HttpClient} from "@angular/common/http";
 import {Dict} from "@shared/dict";
+import {StorageService} from "@shared";
 
 
 @Component({
@@ -20,14 +20,17 @@ export class AppPageComponent extends SafeSubscriptionComponent implements OnIni
 
   public questionary$: Observable<Questionary>;
   public currentStep$: Observable<QuestionContainer>;
-  private data = {};
+  public data = {};
 
-  constructor(private activatedRoute: ActivatedRoute, private router: Router, private formService: FormService, private http: HttpClient) {
+  constructor(private activatedRoute: ActivatedRoute,
+              private router: Router,
+              private formService: FormService,
+              private storageService: StorageService) {
     super();
   }
 
   ngOnInit() {
-    this.data = this.restoreFromLocalStorage();
+    this.data = this.storageService.restore();
 
     this.questionary$ = this.activatedRoute.paramMap.pipe(
       map(params => questions.find(q => q.id === params.get(ROUTE_PARAMETER_CURRENT_QUESTIONARY))),
@@ -46,7 +49,6 @@ export class AppPageComponent extends SafeSubscriptionComponent implements OnIni
     this.subscribe(step$.pipe(
       filter(([id]) => id === "start"),
     ), ([, questionary]) => {
-      console.log(questionary.questionContainers[0]);
       this.router.navigate(["../", questionary.questionContainers[0].id], {relativeTo: this.activatedRoute});
     });
   }
@@ -70,16 +72,9 @@ export class AppPageComponent extends SafeSubscriptionComponent implements OnIni
     });
   }
 
-  public storeToLocalStorage(data: Dict) {
-    localStorage.setItem("data", JSON.stringify(data));
-  }
-
-  public restoreFromLocalStorage(): Dict {
-    return JSON.parse(localStorage.getItem("data") || "{}");
-  }
 
   public dataChanged(data: Dict) {
     this.data = data;
-    this.storeToLocalStorage(data);
+    this.storageService.store(data);
   }
 }

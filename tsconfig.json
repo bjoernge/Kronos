@@ -9,8 +9,6 @@
     "module": "esnext",
     "moduleResolution": "node",
     "experimentalDecorators": true,
-    "module": "esnext",
-    "moduleResolution": "node",
     "importHelpers": true,
     "target": "es2015",
     "typeRoots": [
@@ -21,8 +19,14 @@
       "dom"
     ],
     "paths": {
+      "@models": [
+        "src/app/models/index.ts"
+      ],
       "@models/*": [
         "src/app/models/*"
+      ],
+      "@shared": [
+        "src/app/shared/index.ts"
       ],
       "@shared/*": [
         "src/app/shared/*"

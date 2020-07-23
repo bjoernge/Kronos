@@ -5,4 +5,5 @@ export interface QuestionOptions {
   text: string,
   hint?: string,
   documents?: DocumentRequest[]
+  placeholder?: string;
 }

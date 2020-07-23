@@ -9,3 +9,5 @@ export * from "./questionContainerBuilder";
 export * from "./questionContext";
 export * from "./textQuestionBuilder";
 export {FormBuilder} from "@shared/builder/formBuilder";
+export {QuestionEntryBuilder} from "@shared/builder/questionEntryBuilder";
+export {BuilderCallBack} from "@shared/builder/builderCallBack";

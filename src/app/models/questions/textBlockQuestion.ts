@@ -4,7 +4,8 @@ import {DocumentRequest} from "./documentRequest";
 
 export class TextBlockQuestion implements Question {
 
-  public readonly type: string = "textBlock";
+  public readonly type: "textBlock" = "textBlock";
+  public placeholder: string;
   public hint: string;
   public id: string;
   public text: string;
@@ -21,5 +22,6 @@ export class TextBlockQuestion implements Question {
     this.id = config.id;
     this.text = config.text;
     this.documentRequests = config.documents;
+    this.placeholder = config.placeholder;
   }
 }

@@ -1,15 +1,22 @@
-import {OnDestroy} from '@angular/core';
-import {Observable, Subscription} from 'rxjs';
+import {OnDestroy} from "@angular/core";
+import {Observable, Subscription} from "rxjs";
 
 export abstract class SafeSubscriptionComponent implements OnDestroy {
-  private subscription: Subscription = new Subscription();
+  protected subscription: Subscription = new Subscription();
 
   public ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
 
-  protected subscribe<T>(observable: Observable<T>, next?: (value: T) => void, error?: (error: any) => void, complete?: () => void) {
-    this.subscription.add(observable.subscribe(next, error, complete));
+  protected subscribe<T>(observable: Observable<T> | Subscription,
+                         next?: (value: T) => void,
+                         error?: (error: any) => void,
+                         complete?: () => void) {
+    if (!(observable instanceof Subscription)) {
+      observable = observable.subscribe(next, error, complete);
+    }
+
+    this.subscription.add(observable);
   }
 
 }

@@ -1,7 +1,7 @@
 <div class="questionary-component-progress-indicator">
   <div *ngFor="let container of questionary.questionContainers | visible: context; let i = index;"
-       [class.active]="i == currentStep"
-       [class.done]="i < currentStep">
+       [class.active]="container == currentStep"
+       [class.done]="i < questionary.questionContainers.indexOf(currentStep)">
   </div>
 </div>
 

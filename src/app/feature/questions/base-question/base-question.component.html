@@ -1,9 +1,13 @@
-<div class="container">
-  <h3 class="mat-subheader">{{question.text | translate}}</h3>
+<div [class.inline]="!question.text" class="container">
+  <h3 *ngIf="question.text" class="mat-subheader">{{question.text | translate: translationContext}}</h3>
   <div class="question">
     <ng-content></ng-content>
   </div>
-  <mat-icon *ngIf="showHint && question.hint" [matTooltip]="question.hint | translate" class="hint" color="accent">
+  <mat-icon *ngIf="showHint && question.hint" [matTooltip]="question.hint | translate: translationContext" class="hint"
+            color="accent">
     information
   </mat-icon>
+  <mat-error *ngFor="let error of control?.errors | keyvalue">
+    {{ ("app.errors." + error.key) | translate: error.value}}
+  </mat-error>
 </div>

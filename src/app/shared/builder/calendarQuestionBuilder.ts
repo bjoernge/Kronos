@@ -21,11 +21,12 @@ export class CalendarQuestionBuilder extends QuestionBuilder<CalendarQuestion> {
 
   public build(): CalendarQuestion {
     return new CalendarQuestion({
-      id: this.id,
+      id: this.fqn,
       text: this.text,
       hint: this.hintText,
       documents: this.documents,
-      calendarType: this.displayType
+      calendarType: this.displayType,
+      placeholder: this.placeholder
     });
   }
 }

@@ -1,35 +1,45 @@
 import {Directive, EventEmitter, Input, OnInit, Output} from "@angular/core";
 import {Question} from "../../models/questions/question";
-import {FormControl} from "@angular/forms";
+import {AbstractControl, FormControl} from "@angular/forms";
+import {SafeSubscriptionComponent} from "@shared/safe-subscription-component";
 
 @Directive()
-export abstract class QuestionBaseComponent<TQuestion extends Question, TAnswer> implements OnInit {
+export abstract class QuestionBaseComponent<TQuestion extends Question, TAnswer, TControl extends AbstractControl = FormControl>
+  extends SafeSubscriptionComponent
+  implements OnInit {
 
 
-    @Input()
-    public context: any;
+  @Input()
+  public translationContext: any;
 
-    @Output()
-    public questionAnswered: EventEmitter<TAnswer> = new EventEmitter<TAnswer>();
+  @Input()
+  public context: any;
 
-    @Input()
-    public question: TQuestion;
+  @Output()
+  public questionAnswered: EventEmitter<TAnswer> = new EventEmitter<TAnswer>();
 
-    @Input()
-    public control: FormControl;
+  @Input()
+  public question: TQuestion;
 
-    public ngOnInit(): void {
+  @Input()
+  public control: TControl;
+
+  public ngOnInit(): void {
+  }
+
+  public expandTranslationContext(add: object) {
+    return ({...this.translationContext, ...add});
+  }
+
+  protected answer(answer?: TAnswer): void {
+    if (answer === undefined) {
+      answer = this.control.value;
     }
 
-    protected answer(answer?: TAnswer): void {
-        if (answer === undefined) {
-            answer = this.control.value;
-        }
+    this.questionAnswered.emit(answer);
+  }
 
-        this.questionAnswered.emit(answer);
-    }
-
-    protected reset(): void {
-        this.control.reset();
-    }
+  protected reset(): void {
+    this.control.reset();
+  }
 }

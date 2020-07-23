@@ -4,9 +4,9 @@ import {QuestionContext} from "@shared/builder/questionContext";
 import {QuestionContextInternal} from "@shared/builder/questionContextInternal";
 
 export class FormBuilder {
+  public used = false;
   private mappings: Dict<string> = {};
   private calculatedMappings: Dict<(ctx: any) => any> = {};
-
   private formName: string;
 
   public constructor(private namespace: string) {
@@ -14,16 +14,19 @@ export class FormBuilder {
 
   public setFormName(formName: string) {
     this.formName = formName;
+    this.used = true;
   }
 
   public addFieldMapping(formFieldName: string, fieldId: string): this {
     this.mappings = {...this.mappings, [formFieldName]: fieldId};
+    this.used = true;
     return this;
   }
 
   public addCalculatedMapping(formFieldName: string, calculation: (ctx: QuestionContext) => any): this {
     this.calculatedMappings =
       {...this.calculatedMappings, [formFieldName]: (raw => calculation(new QuestionContextInternal(raw, this.namespace)))};
+    this.used = true;
     return this;
   }
 

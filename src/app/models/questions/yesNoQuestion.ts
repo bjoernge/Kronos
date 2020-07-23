@@ -3,8 +3,9 @@ import {QuestionOptions} from "./questionOptions";
 import {DocumentRequest} from "./documentRequest";
 
 export class YesNoQuestion implements Question {
-  public readonly type: string = "yesno";
+  public readonly type: "yesno" = "yesno";
   public hint: string;
+  public placeholder: string;
   public id: string;
   public text: string;
   public yesText: string;
@@ -24,5 +25,6 @@ export class YesNoQuestion implements Question {
     this.noText = config.noText;
 
     this.documentRequests = config.documents;
+    this.placeholder = config.placeholder;
   }
 }
